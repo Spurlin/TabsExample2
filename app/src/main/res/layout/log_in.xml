@@ -73,10 +73,10 @@
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:ems="10"
+                android:hint="Email"
                 android:inputType="textPersonName"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="Email"
-                android:textSize="15dp"/>
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -99,7 +99,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPassword" />
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textSize="15dp" />
         </LinearLayout>
 
         <android.support.constraint.ConstraintLayout

@@ -64,14 +64,15 @@
                     <!--android:text="Art"-->
                     <!--/>-->
 
-            <Spinner
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:id="@+id/whatIf_Spinner"
-                android:visibility="visible"
-                android:layout_gravity="right"
-                android:spinnerMode="dropdown"
-                android:dropDownVerticalOffset="?attr/actionBarSize"/>
+                <Spinner
+                    android:id="@+id/whatIf_Spinner"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:dropDownVerticalOffset="?attr/actionBarSize"
+                    android:popupBackground="@android:color/background_light"
+                    android:spinnerMode="dropdown"
+                    android:visibility="visible" />
             </android.support.v7.widget.Toolbar>
 
             <!--android:popupBackground="@color/colorAccent"-->
