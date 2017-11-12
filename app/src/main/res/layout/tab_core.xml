@@ -22,21 +22,31 @@
             android:scrollbarAlwaysDrawVerticalTrack="true">
 
             //Progress bar and course info goes here
+
+            <TextView
+                android:id="@+id/pageName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Core Curriculum"
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
+
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:indeterminate="false"
-                android:max="120"
-                android:progress="75" />
+                android:max="45"
+                android:progress="12" />
 
             <TextView
                 android:id="@+id/ratio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="75/120"
-                android:textAlignment="center" />
+                android:text="12/45 credits"
+                android:textAlignment="center"
+                android:textColorLink="@android:color/black" />
 
             <Space
                 android:layout_width="match_parent"
@@ -46,7 +56,8 @@
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Writing"
+                android:text="English"
+                android:textColor="@android:color/black"
                 android:textSize="24sp" />
 
             <TableLayout
@@ -64,6 +75,7 @@
                         android:layout_height="match_parent"
                         android:text="Course"
                         android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
                         android:textSize="18sp" />
 
                     <TextView
@@ -72,6 +84,7 @@
                         android:layout_height="match_parent"
                         android:text="Description"
                         android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
                         android:textSize="18sp" />
 
                     <TextView
@@ -80,6 +93,7 @@
                         android:layout_height="match_parent"
                         android:text="Grade"
                         android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
                         android:textSize="18sp" />
 
                 </TableRow>
@@ -94,14 +108,16 @@
                         android:layout_height="wrap_content"
                         android:text=" ENGL1301"
                         android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/description2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=" Composition I"
+                        android:text="College Composition I"
                         android:textAlignment="textStart"
+                        android:textColor="@color/linkColor"
                         android:textSize="14sp" />
 
                     <TextView
@@ -110,17 +126,258 @@
                         android:layout_height="wrap_content"
                         android:text="A"
                         android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
                         android:textSize="14sp" />
 
                 </TableRow>
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/course2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" ENGL1302"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/description2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="College Composition II"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/linkColor"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/grade2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Math"
+                android:textColor="@android:color/black"
+                android:textSize="24sp" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*">
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/course"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Course"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Description"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/grade"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Grade"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/course2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" MATH1314"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/description2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="College Algebra"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/linkColor"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/grade2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="B"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/course2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" MATH1316"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/description2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Trigonometry"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/linkColor"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/grade2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/course2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" MATH2412"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/description2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Precalculus"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/linkColor"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/grade2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="B"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/course2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" MATH2413"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/description2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Calculus I"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/linkColor"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/grade2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/course2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" MATH2414"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/description2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Calculus II"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/linkColor"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/grade2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                </TableRow>
+
             </TableLayout>
 
         </LinearLayout>
