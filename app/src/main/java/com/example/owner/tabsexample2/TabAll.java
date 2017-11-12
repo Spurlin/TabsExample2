@@ -4,6 +4,7 @@ package com.example.owner.tabsexample2;
  * Created by Owner on 10/18/2017.
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,4 +19,5 @@ public class TabAll extends Fragment {
         View rootView = inflater.inflate(R.layout.tab_all, container, false);
         return rootView;
     }
+
 }

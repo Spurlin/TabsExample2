@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+
+
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerToggle = new ActionBarDrawerToggle(this, mDrawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
@@ -246,5 +248,9 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+//this is where the popup is
+    public void onClick(View v) {
+        startActivity(new Intent(MainActivity.this,Pop.class));
     }
 }

@@ -1,12 +1,12 @@
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/appbar_padding_top"
+    android:background="@drawable/gradient"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/appbar_padding_top"
     tools:context="com.example.owner.tabsexample2.MainActivity$PlaceholderFragment">
 
     <android.support.v4.widget.NestedScrollView
@@ -14,14 +14,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp">
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:scrollbarAlwaysDrawVerticalTrack="true">
+            setBackground="@drawable/gradient"
 
             //Progress bar and course info goes here
 
@@ -38,8 +39,10 @@
                 android:id="@+id/ratio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="75/120"
-                android:textAlignment="center" />
+                android:text="75/120 credits"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_light"
+                android:textColorLink="@android:color/black" />
 
             <Space
                 android:layout_width="match_parent"
@@ -60,6 +63,7 @@
                         android:layout_height="match_parent"
                         android:text="Course"
                         android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
                         android:textSize="18sp" />
 
                     <TextView
@@ -68,6 +72,7 @@
                         android:layout_height="match_parent"
                         android:text="Description"
                         android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
                         android:textSize="18sp" />
 
                     <TextView
@@ -76,6 +81,7 @@
                         android:layout_height="match_parent"
                         android:text="Grade"
                         android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
                         android:textSize="18sp" />
 
                 </TableRow>
@@ -88,24 +94,34 @@
                         android:id="@+id/course2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:width="@android:dimen/app_icon_size"
                         android:text=" ENGL1301"
                         android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/description2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=" Composition I"
+                        android:width="@android:dimen/app_icon_size"
+                        android:clickable="true"
+                        android:onClick="onClick"
+                        android:linksClickable="true"
+                        android:text="College Composition I"
                         android:textAlignment="textStart"
+                        android:textColor="@color/linkColor"
+                        android:textColorLink="@android:color/holo_blue_dark"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/grade2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:width="@android:dimen/app_icon_size"
                         android:text="A"
                         android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
                         android:textSize="14sp" />
 
                 </TableRow>
