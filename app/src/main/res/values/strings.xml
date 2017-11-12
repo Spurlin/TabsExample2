@@ -5,9 +5,10 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="title_adviser">My Adviser</string>
+    <string name="title_adviser">My Advisor</string>
     <string name="title_whatif">What IF</string>
     <string name="title_signout">Sign Out</string>
     <string name="title_current_courses">Current Courses</string>
-
+    <string name="sortby1">Course Code</string>
+    <string name="sortby2">Credits</string>
 </resources>

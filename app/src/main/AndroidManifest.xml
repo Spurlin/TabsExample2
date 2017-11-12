@@ -33,7 +33,7 @@
 
         <activity
             android:name=".Adviser"
-            android:label="Adviser"
+            android:label="Advisor"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
 
