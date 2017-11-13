@@ -60,6 +60,23 @@
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
 
+            <ProgressBar
+                android:id="@+id/progressBar2"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                android:max="6"
+                android:progress="3" />
+
+            <TextView
+                android:id="@+id/ratio2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3/6 credits"
+                android:textAlignment="center"
+                android:textColorLink="@android:color/black" />
+
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -176,6 +193,23 @@
                 android:text="Math"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
+
+            <ProgressBar
+                android:id="@+id/progressBar3"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                android:max="15"
+                android:progress="9" />
+
+            <TextView
+                android:id="@+id/ratio3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="9/15 credits"
+                android:textAlignment="center"
+                android:textColorLink="@android:color/black" />
 
             <TableLayout
                 android:layout_width="match_parent"
