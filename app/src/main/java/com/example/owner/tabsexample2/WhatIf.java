@@ -60,7 +60,7 @@ public class WhatIf extends AppCompatActivity {
 
         adapterMajor = new ArrayAdapter<String>(this, R.layout.spinner_item, majors);
 
-        adapterMajor.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        adapterMajor.setDropDownViewResource(R.layout.spinner_dropdown_items);
 
         spMajor.setAdapter(adapterMajor);
 
