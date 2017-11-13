@@ -8,13 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.AlertDialog;
 
 /**
  * Created by j_spu on 11/5/2017.
  */
 
-public class Log_In extends AppCompatActivity {
-
+public class Log_In extends AppCompatActivity implements AsyncResponse {
     // Global Variables
     private String userName;
     private String pswd;
@@ -49,46 +49,29 @@ public class Log_In extends AppCompatActivity {
                 // get the entered values for username and password
                 userName = usrName_Btn.getText().toString();
                 pswd = pswd_Btn.getText().toString();
+                checkCredentials(userName,pswd);
 
-                // if username entered successful credentials
-                if (checkCredentials(userName, pswd) ) {
-                    Toast.makeText(Log_In.this, "Logged In", Toast.LENGTH_SHORT).show();
-                    successLogIn();
-                } else {
-                    // if the user has entered wrong info for the first two times
-                    if (failedAttemptCount < 2) {
-                        Toast.makeText(Log_In.this, "Incorrect Credentials", Toast.LENGTH_SHORT).show();
-                        clearPassword();
-                    } else if (failedAttemptCount == 2) {
-                        // if user entered wrong info and has one try left for that username
-                        Toast.makeText(Log_In.this, "Incorrect Credentials. You are 1 try away from being locked out of this account.", Toast.LENGTH_SHORT).show();
-                        clearPassword();
-                    } else {
-                        // if user enterd wrong credentials all four times
-                        Toast.makeText(Log_In.this, "Incorrect Credentials. You are currently locked out of this account.", Toast.LENGTH_SHORT).show();
-                        clearAllCredentials();
-                    }
-
-
-                }
         }});
 
 
     }
 
-    private boolean checkCredentials(String userName, String password) {
+    private void checkCredentials(String userName, String password) {
+
+        String type = "login";
+        DBConnector dbConnector = new DBConnector(this);
+        dbConnector.delegate = this;
+        dbConnector.execute(type, userName, password);
 
         // will be changed to the username and password for the student from
         // the database
-        String name = "jspurlin";
-        String pass = "test";
-
+        //String name = "jspurlin";
+        //String pass = "test";
         // checks if the username and password are correct
-        if (userName.equals(name) && password.equals(pass)) { return true; }
-        else { return false; }
+        //if (userName.equals(name) && password.equals(pass)) { return true; }
+        //else { return false; }
 
     }
-
     // user performed a successful log in
     // clear the username and password box for security purposes
     // and start the app at the current courses page
@@ -111,4 +94,27 @@ public class Log_In extends AppCompatActivity {
     // more tries
     private void clearPassword() { pswd_Btn.setText(""); failedAttemptCount++;}
 
+    @Override
+    public void processFinish(boolean res) {
+        if (res) {
+            Toast.makeText(Log_In.this, "Logged In", Toast.LENGTH_SHORT).show();
+            successLogIn();
+        } else {
+            // if the user has entered wrong info for the first two times
+            if (failedAttemptCount < 2) {
+                Toast.makeText(Log_In.this, "Incorrect Credentials", Toast.LENGTH_SHORT).show();
+                clearPassword();
+            } else if (failedAttemptCount == 2) {
+                // if user entered wrong info and has one try left for that username
+                Toast.makeText(Log_In.this, "Incorrect Credentials. You are 1 try away from being locked out of this account.", Toast.LENGTH_SHORT).show();
+                clearPassword();
+            } else {
+                // if user enterd wrong credentials all four times
+                Toast.makeText(Log_In.this, "Incorrect Credentials. You are currently locked out of this account.", Toast.LENGTH_SHORT).show();
+                clearAllCredentials();
+            }
+
+
+        }
+    }
 }
