@@ -9,6 +9,10 @@
     <string name="title_whatif">What IF</string>
     <string name="title_signout">Sign Out</string>
     <string name="title_current_courses">Current Courses</string>
-    <string name="sortby1">Course Code</string>
-    <string name="sortby2">Credits</string>
+    <string name="table1">Career</string>
+    <string name="table2">Units</string>
+    <string name="table3">Grading Basis</string>
+    <string name="table4">Campus</string>
+    <string name="table5">Typically Offered</string>
+    <string name="table6">Description</string>
 </resources>
