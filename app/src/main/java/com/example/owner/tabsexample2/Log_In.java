@@ -34,14 +34,6 @@ public class Log_In extends AppCompatActivity implements AsyncResponse {
 
         logIn = (Button) findViewById(R.id.logIn);
 
-        // clears the defaulted value for the user name box
-        // when user taps on it to enter something
-        usrName_Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                usrName_Btn.setText("");;
-            }});
-
         // if the user tries to log in
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,15 +55,8 @@ public class Log_In extends AppCompatActivity implements AsyncResponse {
         dbConnector.delegate = this;
         dbConnector.execute(type, userName, password);
 
-        // will be changed to the username and password for the student from
-        // the database
-        //String name = "jspurlin";
-        //String pass = "test";
-        // checks if the username and password are correct
-        //if (userName.equals(name) && password.equals(pass)) { return true; }
-        //else { return false; }
-
     }
+
     // user performed a successful log in
     // clear the username and password box for security purposes
     // and start the app at the current courses page

@@ -9,13 +9,15 @@ public class ClassSession
     public final String instructorName;
     public final String semester;
     public final String room;
-    public final String schedule;
+    public final String scheduleDay;
+    public final String scheduleTime;
 
-    public ClassSession(String instr, String sem, String r, String sch)
+    public ClassSession(String instr, String sem, String r, String schDay, String schTime)
     {
         instructorName = instr;
         semester = sem;
         room = r;
-        schedule = sch;
+        scheduleDay = schDay;
+        scheduleTime = schTime;
     }
 }

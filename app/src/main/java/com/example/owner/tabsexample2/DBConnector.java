@@ -29,15 +29,21 @@ public class DBConnector extends AsyncTask<String,Void,String> {
     DBConnector (Context ctx) {
         context = ctx;
     }
+
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
         String login_url = "http://cosc5384.us/teamas/login.php";
+
         if(type.equals("login")) {
             try {
                 String email = params[1];
                 String password = params[2];
                 URL url = new URL(login_url);
+
+                System.out.println("<EMAIL> " + email);
+                System.out.println("<PASSWORD>" + password);
+
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
@@ -56,6 +62,8 @@ public class DBConnector extends AsyncTask<String,Void,String> {
                 String line="";
                 while((line = bufferedReader.readLine())!= null) {
                     result += line;
+
+                    System.out.println("<RESULT> " + result);
                 }
                 bufferedReader.close();
                 inputStream.close();
@@ -84,17 +92,17 @@ public class DBConnector extends AsyncTask<String,Void,String> {
         //if connection error occurs, throw an error message
         if(result.contentEquals("connecterror")) {
             delegate.processFinish(false);
-            //Toast toast= Toast.makeText(context, "Login Error", Toast.LENGTH_SHORT);
-            //toast.show();
+            Toast toast= Toast.makeText(context, "Login Error", Toast.LENGTH_SHORT);
+            toast.show();
         }
 
         //if connection succeeds, move to your next activity
         else
         {
             delegate.processFinish(true);
-            //Toast toast= Toast.makeText(context, "Login Successfully", Toast.LENGTH_SHORT);
-            //toast.show();
-            //context.startActivity(new Intent(context, TabAll.class));
+            Toast toast= Toast.makeText(context, "Login Successfully", Toast.LENGTH_SHORT);
+            toast.show();
+            context.startActivity(new Intent(context, MainActivity.class));
         }
 
     }
