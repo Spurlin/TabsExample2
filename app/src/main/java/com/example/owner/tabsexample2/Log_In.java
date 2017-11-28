@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.app.AlertDialog;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * Created by j_spu on 11/5/2017.
  */
@@ -23,6 +25,8 @@ public class Log_In extends AppCompatActivity implements AsyncResponse {
     private EditText pswd_Btn;
     private String defaultEmail = "Email";
     private int failedAttemptCount = 0;
+
+    private StudentRecord record;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,19 @@ public class Log_In extends AppCompatActivity implements AsyncResponse {
         DBConnector dbConnector = new DBConnector(this);
         dbConnector.delegate = this;
         dbConnector.execute(type, userName, password);
+        try {
+            String result = dbConnector.get();
+            System.out.println(result);
+            String[] fields = result.split("~");
+            System.out.println("Fields: " + fields.length);
+            if(fields.length < 5)
+                System.exit(1);
+            record = new StudentRecord(fields[1], fields[2], fields[3], fields[4]);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
         String result = dbConnector.getResults();
 

@@ -9,7 +9,7 @@ public class DegreePlan
     public final String name;
     public DegreeRequirement[] requirements;
     public final int creditsNeeded;
-    public int creditsEarned;
+    private int creditsEarned;
 
     public DegreePlan(String n, int creds)
     {
@@ -24,6 +24,11 @@ public class DegreePlan
         {
             creditsEarned += r.CalculateCreditsEarned();
         }
+        return creditsEarned;
+    }
+
+    public int getCreditsEarned()
+    {
         return creditsEarned;
     }
 }

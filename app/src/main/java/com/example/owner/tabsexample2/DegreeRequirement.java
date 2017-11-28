@@ -9,8 +9,8 @@ public class DegreeRequirement
     public final String name;
     public Course[] courses;
     public final int creditsNeeded;
-    public int creditsEarned;
-    public boolean done = false;
+    private int creditsEarned;
+    private boolean done = false;
 
     public DegreeRequirement(String n, int creds)
     {
@@ -29,5 +29,15 @@ public class DegreeRequirement
         if(creditsEarned >= creditsNeeded)
             done = true;
         return creditsEarned;
+    }
+
+    public int getCreditsEarned()
+    {
+        return creditsEarned;
+    }
+
+    public boolean isDone()
+    {
+        return done;
     }
 }
