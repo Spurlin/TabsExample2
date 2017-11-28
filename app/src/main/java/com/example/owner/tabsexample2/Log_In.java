@@ -55,6 +55,10 @@ public class Log_In extends AppCompatActivity implements AsyncResponse {
         dbConnector.delegate = this;
         dbConnector.execute(type, userName, password);
 
+        String result = dbConnector.getResults();
+
+        System.out.println("<-RESULTS->");
+        System.out.print(result);
     }
 
     // user performed a successful log in
@@ -82,7 +86,7 @@ public class Log_In extends AppCompatActivity implements AsyncResponse {
     @Override
     public void processFinish(boolean res) {
         if (res) {
-            Toast.makeText(Log_In.this, "Logged In", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(Log_In.this, "Logged In", Toast.LENGTH_SHORT).show();
             successLogIn();
         } else {
             // if the user has entered wrong info for the first two times

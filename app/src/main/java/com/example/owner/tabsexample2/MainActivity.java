@@ -1,5 +1,7 @@
 package com.example.owner.tabsexample2;
 
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
@@ -24,12 +26,18 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.AttributeSet;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
     private TabLayout tabLayout;
+    private PopupWindow popupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawer.getForeground().setAlpha(0);
         drawerToggle = new ActionBarDrawerToggle(this, mDrawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         mDrawer.addDrawerListener(drawerToggle);
@@ -208,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+
             //Returning the current tabs
             switch (position) {
                 case 0:
@@ -219,9 +230,6 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                     TabMajor tabM = new TabMajor();
                     return tabM;
-                case 3:
-                    TabMinor tabMin = new TabMinor();
-                    return tabMin;
                 default:
                     return null;
             }
@@ -231,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 4 total pages.
-            return 4;
+            return 3;
         }
 
         @Override
@@ -243,14 +251,40 @@ public class MainActivity extends AppCompatActivity {
                     return "Core";
                 case 2:
                     return "Major";
-                case 3:
-                    return "Minor";
             }
             return null;
         }
     }
+
 //this is where the popup is
     public void onClick(View v) {
-        startActivity(new Intent(MainActivity.this,Pop.class));
+//        startActivity(new Intent(MainActivity.this,Pop.class));
+
+        DrawerLayout mainLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popupwindow, null);
+
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+        popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // show in the center of the screen
+        popupWindow.showAtLocation(mainLayout, Gravity.CENTER, 0, 0);
+
+        // greys the layout that the pop up window is on top of
+        mDrawer.getForeground().setAlpha(220);
+
+        // handles when the pop up window is closed via touch outside of window or
+        // via back button
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                mDrawer.getForeground().setAlpha(0);
+                popupWindow.dismiss();
+            }
+        });
+
     }
 }

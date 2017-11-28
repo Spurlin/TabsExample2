@@ -1,10 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/gradient"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
                 tools:context="com.example.owner.tabsexample2.MainActivity$PlaceholderFragment">
 
     <android.support.v4.widget.NestedScrollView
@@ -14,6 +15,30 @@
         android:fillViewport="true"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="8dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        // header card
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:cardCornerRadius="20dp"
+            android:elevation="20dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15sp"
+            android:paddingRight="15sp"
+            android:paddingTop="15sp"
+            android:paddingBottom="15sp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,9 +73,31 @@
                 android:textAlignment="center"
                 android:textColorLink="@android:color/black" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="32dp" />
+        </LinearLayout>
+        </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            app:cardCornerRadius="20dp"
+            android:elevation="20dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15sp"
+            android:paddingRight="15sp"
+            android:paddingTop="15sp"
+            android:paddingBottom="15sp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView8"
@@ -182,9 +229,31 @@
 
             </TableLayout>
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="32dp" />
+        </LinearLayout>
+        </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            app:cardCornerRadius="20dp"
+            android:elevation="20dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15sp"
+            android:paddingRight="15sp"
+            android:paddingTop="15sp"
+            android:paddingBottom="15sp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView9"
@@ -413,6 +482,9 @@
                 </TableRow>
 
             </TableLayout>
+        </LinearLayout>
+        </RelativeLayout>
+        </android.support.v7.widget.CardView>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

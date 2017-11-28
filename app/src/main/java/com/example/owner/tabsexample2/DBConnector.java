@@ -24,6 +24,7 @@ import java.net.URLEncoder;
 
 public class DBConnector extends AsyncTask<String,Void,String> {
     public AsyncResponse delegate = null;
+    private String result = "";
     Context context;
     AlertDialog alertDialog;
     DBConnector (Context ctx) {
@@ -58,7 +59,8 @@ public class DBConnector extends AsyncTask<String,Void,String> {
                 outputStream.close();
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
-                String result="";
+
+
                 String line="";
                 while((line = bufferedReader.readLine())!= null) {
                     result += line;
@@ -111,4 +113,6 @@ public class DBConnector extends AsyncTask<String,Void,String> {
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
     }
+
+    public String getResults() { return result; }
 }

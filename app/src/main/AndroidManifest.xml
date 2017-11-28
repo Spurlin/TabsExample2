@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ut_tyler_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".Log_In"
             android:theme="@style/AppTheme.NoActionBar">
@@ -24,6 +25,10 @@
             android:name=".MainActivity"
             android:label="@string/title_current_courses"
             android:theme="@style/AppTheme.NoActionBar">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
 
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN"/>-->

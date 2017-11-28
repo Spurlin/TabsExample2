@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:foreground="@drawable/popupbackground">
 
     <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,7 +29,7 @@
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/mainCollapse"
                 android:layout_width="match_parent"
-                android:layout_height="115dp"
+                android:layout_height="100dp"
                 android:fitsSystemWindows="true"
                 app:contentScrim="@color/colorPrimary"
                 app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed|snap"
@@ -46,7 +47,7 @@
                 <android.support.design.widget.TabLayout
                     android:id="@+id/tabs"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
                     android:layout_gravity="bottom"
                     android:elevation="14dp" />
 
