@@ -9,7 +9,7 @@ public class Course
     public final CourseStatus status;
     public final String when;
     public final String description;
-    public ClassSession[] classes;
+    public ClassSession[] sessions;
 
     public Course(String code, String n, int u, CourseStatus stat, String w, String desc)
     {
