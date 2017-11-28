@@ -80,7 +80,7 @@ public class DBConnector extends AsyncTask<String,Void,String> {
     protected void onPostExecute(String result) {
 
         alertDialog.setMessage(result);
-        //alertDialog.show();
+        alertDialog.show();
         //if connection error occurs, throw an error message
         if(result.contentEquals("connecterror")) {
             delegate.processFinish(false);
