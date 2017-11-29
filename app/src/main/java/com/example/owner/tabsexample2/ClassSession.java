@@ -6,18 +6,49 @@ package com.example.owner.tabsexample2;
 
 public class ClassSession
 {
-    public final String instructorName;
-    public final String semester;
-    public final String room;
-    public final String scheduleDay;
-    public final String scheduleTime;
+    private final String instructorName;
+    private final String semester;
+    private final String room;
+    private final String schedule;
+    private final String sessionID;
 
-    public ClassSession(String instr, String sem, String r, String schDay, String schTime)
+
+    public ClassSession(String instr, String smstr, String rm, String schdl, String sId)
     {
+        System.out.println("Instructor: " + instr);
         instructorName = instr;
-        semester = sem;
-        room = r;
-        scheduleDay = schDay;
-        scheduleTime = schTime;
+        System.out.println("Semester: " + smstr);
+        semester = smstr;
+        System.out.println("Room: " + rm);
+        room = rm;
+        System.out.println("Schedule: " + schdl);
+        schedule = schdl;
+        System.out.println("Session ID: " + sId);
+        sessionID = sId;
+    }
+
+    public String getInstructor()
+    {
+        return instructorName;
+    }
+
+    public String getSemester()
+    {
+        return semester;
+    }
+
+    public String getRoom()
+    {
+        return room;
+    }
+
+    public String getSchedule()
+    {
+        return schedule;
+    }
+
+    public String getSession()
+    {
+        return sessionID;
     }
 }

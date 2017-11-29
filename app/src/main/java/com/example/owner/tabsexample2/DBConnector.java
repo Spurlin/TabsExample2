@@ -35,6 +35,7 @@ public class DBConnector extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... params) {
         String type = params[0];
         String login_url = "http://cosc5384.us/teamas/login.php";
+        String allcourses_url = "http://cosc5384.us/teamas/allcourses.php";
 
         if(type.equals("login")) {
             try {
@@ -77,34 +78,72 @@ public class DBConnector extends AsyncTask<String,Void,String> {
                 e.printStackTrace();
             }
         }
+        else if(type.equals("allcourses")) {
+            try {
+                String stuId = params[1];
+                URL url = new URL(allcourses_url);
+
+                System.out.println("<STUID> " + stuId);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_data = URLEncoder.encode("stu_id","UTF-8")+"="+URLEncoder.encode(stuId,"UTF-8");
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+
+
+                String line="";
+                while((line = bufferedReader.readLine())!= null) {
+                    result += line;
+
+                    System.out.println("<RESULT> " + result);
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return null;
     }
 
     @Override
     protected void onPreExecute() {
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Login Status");
+        //alertDialog = new AlertDialog.Builder(context).create();
+        //alertDialog.setTitle("Login Status");
     }
 
     @Override
     protected void onPostExecute(String result) {
 
-        alertDialog.setMessage(result);
-        alertDialog.show();
+        //alertDialog.setMessage(result);
+        //alertDialog.show();
         //if connection error occurs, throw an error message
         if(result.contentEquals("connecterror")) {
             delegate.processFinish(false);
-            Toast toast= Toast.makeText(context, "Login Error", Toast.LENGTH_SHORT);
-            toast.show();
+            //Toast toast= Toast.makeText(context, "Login Error", Toast.LENGTH_SHORT);
+            //toast.show();
         }
 
         //if connection succeeds, move to your next activity
         else
         {
             delegate.processFinish(true);
-            Toast toast= Toast.makeText(context, "Login Successfully", Toast.LENGTH_SHORT);
-            toast.show();
-            context.startActivity(new Intent(context, MainActivity.class));
+            //Toast toast= Toast.makeText(context, "Login Successfully", Toast.LENGTH_SHORT);
+            //toast.show();
+            //context.startActivity(new Intent(context, MainActivity.class));
         }
 
     }

@@ -23,8 +23,8 @@ public class DegreeRequirement
         creditsEarned = 0;
         for (Course c : courses)
         {
-            if(c.status.ordinal() >= CourseStatus.C.ordinal())
-                creditsEarned += c.units;
+            if(c.getStatus().ordinal() >= CourseStatus.C.ordinal())
+                creditsEarned += c.getUnits();
         }
         if(creditsEarned >= creditsNeeded)
             done = true;

@@ -63,9 +63,9 @@ public class Log_In extends AppCompatActivity implements AsyncResponse {
             System.out.println(result);
             String[] fields = result.split("~");
             System.out.println("Fields: " + fields.length);
-            if(fields.length < 5)
-                System.exit(1);
-            record = new StudentRecord(fields[1], fields[2], fields[3], fields[4]);
+            if(fields.length >= 5) { //Don't try this if we didn't get enough fields to set up the student.
+                record = new StudentRecord(fields[1], fields[2], fields[3], fields[4]);//Start building the student record.
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -92,7 +92,7 @@ public class Log_In extends AppCompatActivity implements AsyncResponse {
     // clears all credentials if the user entered wrong
     // info more than four times
     private void clearAllCredentials() {
-        usrName_Btn.setText(defaultEmail);
+        usrName_Btn.setText("");
         pswd_Btn.setText("");
     }
 
@@ -103,7 +103,7 @@ public class Log_In extends AppCompatActivity implements AsyncResponse {
     @Override
     public void processFinish(boolean res) {
         if (res) {
-//            Toast.makeText(Log_In.this, "Logged In", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Log_In.this, "Logged In", Toast.LENGTH_SHORT).show();
             successLogIn();
         } else {
             // if the user has entered wrong info for the first two times
