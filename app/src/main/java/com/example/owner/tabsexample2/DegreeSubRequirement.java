@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutionException;
  * Created by wamtu on 11/29/2017.
  */
 
-public class DegreeSubRequirement extends AppCompatActivity implements AsyncResponse
+public class DegreeSubRequirement
 {
     private final String lnCode;
     private ArrayList<Course> courses;
@@ -17,16 +17,16 @@ public class DegreeSubRequirement extends AppCompatActivity implements AsyncResp
     private float creditsEarned;
     private boolean done = false;
 
-    public DegreeSubRequirement(String ln, String course, StudentRecord allCourses)
+    public DegreeSubRequirement(String ln, String course, String nm, String desc, String spec, String un, StudentRecord allCourses)
     {
         System.out.println("Creating new sub-requirement\nLN Code: " + ln);
         lnCode = ln;
         creditsNeeded = 0;//Gets added to when we add new courses.
         courses = new ArrayList<>();
-        addCourseByCode(course, allCourses);
+        addCourseByCode(course, nm, desc, spec, un, allCourses);
     }
 
-    public void addCourseByCode(String code, StudentRecord allCourses)
+    public void addCourseByCode(String code, String nm, String desc, String spec, String un, StudentRecord allCourses)
     {
         if(allCourses.getCourseByCode(code) != null)//Check if this course has already been pulled from the database.
         {
@@ -35,26 +35,14 @@ public class DegreeSubRequirement extends AppCompatActivity implements AsyncResp
             courses.add(newCourse);//Give this sub-requirement a pointer to the existing course.
             creditsNeeded += newCourse.getUnits();//Add this course's units to the credits needed.
         }
-        else//If we don't already have this course, pull it from the database.
+        else//If we don't already have this course, create a new object based off given data:
         {
-            //Get the missing course:
-            String type = "singlecourse";
-            DBConnector dbConnector = new DBConnector(this);
-            dbConnector.delegate = this;
-            dbConnector.execute(type, code);
-            String result = null;
-            try {
-                result = dbConnector.get();
-                String[] fields = result.split("~");
-                System.out.println("Fields: " + fields.length);
-                if(fields.length >= 5)
-                    allCourses.addCourse(new Course(code, fields[1], fields[2], fields[3], fields[4]));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
+            Course newCourse = new Course(code, nm, desc, spec, un);
+            System.out.println("Adding " + code + " to " + lnCode);
+            courses.add(newCourse);
+            creditsNeeded += newCourse.getUnits();
         }
+
     }
 
     public String getLnCode()
@@ -109,11 +97,5 @@ public class DegreeSubRequirement extends AppCompatActivity implements AsyncResp
     public boolean isDone()
     {
         return done;
-    }
-
-    @Override
-    public void processFinish(boolean res)
-    {
-
     }
 }

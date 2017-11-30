@@ -36,12 +36,14 @@ public class DegreeRequirement extends AppCompatActivity implements AsyncRespons
             String[] fields = result.split("~");
             System.out.println("Fields: " + fields.length);
             subRequirements = new ArrayList();
-            for(int i = 1; i < fields.length - 1; i += 2)//Create each degree requirement object.
+            for(int i = 1; i < fields.length - 5; i += 6)//Create each sub-requirement object.
             {
-                if(getSubRequirementByCode(fields[i]) == null)
-                    subRequirements.add(new DegreeSubRequirement(fields[i], fields[i + 1], allCourses));
-                else
-                    getSubRequirementByCode(fields[i]).addCourseByCode(fields[i + 1], allCourses);
+                if(getSubRequirementByCode(fields[i]) == null)//If we don't have this sub-req yet, create a new one.
+                    subRequirements.add(new DegreeSubRequirement(fields[i], fields[i + 1],
+                            fields[i + 2], fields[i + 3], fields[i + 4], fields[i + 5], allCourses));//We pull all course info just in case we need it; otherwise, we'd overwhelm the database.
+                else//If we already have this sub-req built, just add a new course to it.
+                    getSubRequirementByCode(fields[i]).addCourseByCode(fields[i + 1], fields[i + 2],
+                            fields[i + 3], fields[i + 4], fields[i + 5], allCourses);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

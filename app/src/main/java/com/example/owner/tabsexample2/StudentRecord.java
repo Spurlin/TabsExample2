@@ -45,7 +45,7 @@ public class StudentRecord extends AppCompatActivity implements AsyncResponse
         }
 
         //Build the degree plan for the student's major:
-        //major = new DegreePlan(majorName, this);//It's broken right now; don't try it.
+        major = new DegreePlan(majorName, this);//It's broken right now; don't try it.
     }
 
     public void addCourse(Course newCourse)
