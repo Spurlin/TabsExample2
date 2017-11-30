@@ -28,10 +28,10 @@ public class DegreeSubRequirement
 
     public void addCourseByCode(String code, String nm, String desc, String spec, String un, StudentRecord allCourses)
     {
-        if(allCourses.getCourseByCode(code) != null)//Check if this course has already been pulled from the database.
+        if(allCourses.getCourse(code) != null)//Check if this course has already been pulled from the database.
         {
             System.out.println("Adding " + code + " to " + lnCode);
-            Course newCourse = allCourses.getCourseByCode(code);
+            Course newCourse = allCourses.getCourse(code);
             courses.add(newCourse);//Give this sub-requirement a pointer to the existing course.
             creditsNeeded += newCourse.getUnits();//Add this course's units to the credits needed.
         }

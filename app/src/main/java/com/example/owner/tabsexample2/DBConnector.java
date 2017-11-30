@@ -38,7 +38,7 @@ public class DBConnector extends AsyncTask<String,Void,String> {
         String allcourses_url = "http://cosc5384.us/teamas/allcourses.php";
         String requirements_url = "http://cosc5384.us/teamas/requirements.php";
         String subrequirements_url = "http://cosc5384.us/teamas/subrequirements.php";
-        String singlecourse_url = "http://cosc5384.us/teamas/singlecourse.php";
+        String degreenames_url = "http://cosc5384.us/teamas/degreenames.php";
 
         if(type.equals("login")) {
             try {
@@ -197,13 +197,10 @@ public class DBConnector extends AsyncTask<String,Void,String> {
                 e.printStackTrace();
             }
         }
-        else if(type.equals("singlecourse"))
+        else if(type.equals("degreenames"))
         {
             try {
-                String courseCode = params[1];
-                URL url = new URL(singlecourse_url);
-
-                System.out.println("<COURSECODE> " + courseCode);
+                URL url = new URL(degreenames_url);
 
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -211,8 +208,6 @@ public class DBConnector extends AsyncTask<String,Void,String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("courseCode","UTF-8")+"="+URLEncoder.encode(courseCode,"UTF-8");
-                bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 outputStream.close();

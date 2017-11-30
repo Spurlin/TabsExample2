@@ -2,6 +2,7 @@ package com.example.owner.tabsexample2;
 
 import android.support.v7.app.AppCompatActivity;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -14,7 +15,8 @@ public class StudentRecord extends AppCompatActivity implements AsyncResponse
     private final String studentName;
     private ArrayList<Course> allCourses;
     private DegreePlan major;
-    private DegreePlan whatIf;
+    private DegreePlan whatIf = null;
+    private String[] degreeNames;
 
     public StudentRecord(String stu_id, String majorName, String fname, String lname)
     {
@@ -46,6 +48,25 @@ public class StudentRecord extends AppCompatActivity implements AsyncResponse
 
         //Build the degree plan for the student's major:
         major = new DegreePlan(majorName, this);//It's broken right now; don't try it.
+
+        //Pull all degree names to use for selecting a "What-If":
+        type = "degreenames";
+        dbConnector = new DBConnector(this);
+        dbConnector.delegate = this;
+        dbConnector.execute(type);//We don't need to send anything to the server this time; all we want is every degree name.
+        result = null;
+        try {
+            result = dbConnector.get();
+            String[] fields = result.split("~");
+            System.out.println("Fields: " + fields.length);
+            degreeNames = new String[fields.length - 1];
+            for(int i = 1; i < fields.length; i++)
+                degreeNames[i - 1] = fields[i];//We need to discard the first one, as it's just going to be "connectsuccess."
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addCourse(Course newCourse)
@@ -53,12 +74,12 @@ public class StudentRecord extends AppCompatActivity implements AsyncResponse
         allCourses.add(newCourse);
     }
 
-    public Course getCourseByIndex(int i)
+    public Course getCourse(int i)
     {
         return allCourses.get(i);
     }
 
-    public Course getCourseByCode(String code)
+    public Course getCourse(String code)
     {
         int match = -1;
 
@@ -72,6 +93,52 @@ public class StudentRecord extends AppCompatActivity implements AsyncResponse
             return allCourses.get(match);
         else
             return null;
+    }
+
+    public DegreePlan getMajor()
+    {
+        return major;
+    }
+
+    public DegreePlan getWhatIf()
+    {
+        return whatIf;
+    }
+
+    //Both of these replace the current "What-If" with a new one:
+    public DegreePlan setWhatIf(int i)
+    {
+        //Choose degree name using an index.
+        if(i >= 0 && i < degreeNames.length)
+        {
+            whatIf = new DegreePlan(degreeNames[i], this);
+            return whatIf;
+        }
+        else
+            return null;//Do nothing if an invalid index.
+    }
+
+    public DegreePlan setWhatIf(String name)
+    {
+        int match = -1;
+        for(int i = 0; i < degreeNames.length; i++)
+        {
+            if(degreeNames[i].equals(name))//Make sure the given degree name exists.
+                match = i;
+        }
+
+        if(match >= 0)//If the degree name exists, build that degree.
+        {
+            whatIf = new DegreePlan(degreeNames[match], this);
+            return whatIf;
+        }
+        else//Otherwise, do nothing.
+            return null;
+    }
+
+    public String getDegreeName(int i)
+    {
+        return degreeNames[i];
     }
 
     @Override
