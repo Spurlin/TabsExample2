@@ -39,6 +39,7 @@ public class DBConnector extends AsyncTask<String,Void,String> {
         String requirements_url = "http://cosc5384.us/teamas/requirements.php";
         String subrequirements_url = "http://cosc5384.us/teamas/subrequirements.php";
         String degreenames_url = "http://cosc5384.us/teamas/degreenames.php";
+        String classes_url = "http://cosc5384.us/teamas/classes.php";
 
         if(type.equals("login")) {
             try {
@@ -208,6 +209,45 @@ public class DBConnector extends AsyncTask<String,Void,String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+
+
+                String line="";
+                while((line = bufferedReader.readLine())!= null) {
+                    result += line;
+
+                    System.out.println("<RESULT> " + result);
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(type.equals("classes"))
+        {
+            try {
+                String courseCode = params[1];
+                URL url = new URL(classes_url);
+
+                System.out.println("<COURSECODE> " + courseCode);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_data = URLEncoder.encode("courseCode","UTF-8")+"="+URLEncoder.encode(courseCode,"UTF-8");
+                bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 outputStream.close();

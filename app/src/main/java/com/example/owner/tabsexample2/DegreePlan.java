@@ -58,12 +58,15 @@ public class DegreePlan extends AppCompatActivity implements AsyncResponse
         return name;
     }
 
-    public DegreeRequirement getRequirementByIndex(int i)
+    public DegreeRequirement getRequirement(int i)
     {
-        return requirements.get(i);
+        if(i >= 0 && i < requirements.size())
+            return requirements.get(i);
+        else
+            return null;
     }
 
-    public DegreeRequirement getRequirementByCode(String code)
+    public DegreeRequirement getRequirement(String code)
     {
         int match = -1;
 

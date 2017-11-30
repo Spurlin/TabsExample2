@@ -23,10 +23,10 @@ public class DegreeSubRequirement
         lnCode = ln;
         creditsNeeded = 0;//Gets added to when we add new courses.
         courses = new ArrayList<>();
-        addCourseByCode(course, nm, desc, spec, un, allCourses);
+        addCourse(course, nm, desc, spec, un, allCourses);
     }
 
-    public void addCourseByCode(String code, String nm, String desc, String spec, String un, StudentRecord allCourses)
+    public void addCourse(String code, String nm, String desc, String spec, String un, StudentRecord allCourses)
     {
         if(allCourses.getCourse(code) != null)//Check if this course has already been pulled from the database.
         {
@@ -40,6 +40,7 @@ public class DegreeSubRequirement
             Course newCourse = new Course(code, nm, desc, spec, un);
             System.out.println("Adding " + code + " to " + lnCode);
             courses.add(newCourse);
+            allCourses.addCourse(newCourse);
             creditsNeeded += newCourse.getUnits();
         }
 
@@ -63,12 +64,15 @@ public class DegreeSubRequirement
         return creditsEarned;
     }
 
-    public Course getCourseByIndex(int i)
+    public Course getCourse(int i)
     {
-        return courses.get(i);
+        if(i >= 0 && i < courses.size())
+            return courses.get(i);
+        else
+            return null;
     }
 
-    public Course getCourseByCode(String code)
+    public Course getCourse(String code)
     {
         int match = -1;
 

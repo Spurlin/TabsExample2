@@ -1,8 +1,11 @@
 package com.example.owner.tabsexample2;
 
-import java.util.ArrayList;
+import android.support.v7.app.AppCompatActivity;
 
-public class Course
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
+public class Course extends AppCompatActivity implements AsyncResponse
 {
 
     private final String courseCode;
@@ -11,7 +14,7 @@ public class Course
     private final CourseStatus status;
     private final String when;
     private final String description;
-    private ArrayList<ClassSession> classes;
+    private ArrayList<ClassSession> classes = null;
 
     public Course(String code, String smstr, String grade, String sId, String nm, String desc, String un, String rm, String schdl, String fname, String lname)
     {
@@ -80,6 +83,36 @@ public class Course
         System.out.println("Done creating new entry for " + courseCode + " " + name);
     }
 
+    public void retrieveClassesFromServer()
+    {
+        if(isTaken())
+        {
+            System.out.println(courseCode + " has been taken; classes have not been retrieved");
+            return;
+        }
+
+        System.out.println("Retrieving classes for " + courseCode);
+        String type = "classes";
+        DBConnector dbConnector = new DBConnector(this);
+        dbConnector.delegate = this;
+        dbConnector.execute(type, courseCode);
+        String result = null;
+        try {
+            result = dbConnector.get();
+            String[] fields = result.split("~");
+            System.out.println("Fields: " + fields.length);
+            classes = new ArrayList<>();
+            for(int i = 1; i < fields.length - 5; i += 6)//Create each class session object.
+                classes.add(new ClassSession((fields[i] + " " + fields[i+1]), fields[i+2], fields[i+3],
+                        fields[i+4], fields[i+5]));//Constructor takes arguments in same order they were sent over from database.
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Done retrieving classes for " + courseCode);
+    }
+
     public String getCode()
     {
         return courseCode;
@@ -110,8 +143,41 @@ public class Course
         return description;
     }
 
-    public ClassSession getClassByIndex(int i)
+    public ClassSession getClass(int i)
     {
-        return classes.get(i);
+        if(i >= 0 && i < classes.size())
+            return classes.get(i);
+        else
+            return null;
+    }
+
+    public ClassSession getClass(String smstr, String sId)
+    {
+        int match = -1;
+
+        for(int i = 0; i < classes.size(); i++)
+        {
+            if(classes.get(i).getSemester().matches(smstr) && classes.get(i).getSession().equals(sId))//Look for a class with the matching semester and session ID.
+                match = i;
+        }
+
+        if(match >= 0)
+            return classes.get(match);
+        else
+            return null;
+    }
+
+    public boolean isTaken()
+    {
+        if(status != CourseStatus.NotTaken)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public void processFinish(boolean res)
+    {
+
     }
 }
