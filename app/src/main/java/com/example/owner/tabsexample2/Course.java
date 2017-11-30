@@ -15,7 +15,7 @@ public class Course
 
     public Course(String code, String smstr, String grade, String sId, String nm, String desc, String un, String rm, String schdl, String fname, String lname)
     {
-        System.out.println("Creating new class\nCourse Code: " + code);
+        System.out.println("Creating new course\nCourse Code: " + code);
         courseCode = code;
         System.out.println("Semester: " + smstr);
         when = smstr;
@@ -60,6 +60,23 @@ public class Course
         description = desc;
         classes = new ArrayList<>();
         classes.add(new ClassSession((fname + " " + lname), smstr, rm, schdl, sId));//Only class added is the one the student took.
+        System.out.println("Done creating new entry for " + courseCode + " " + name);
+    }
+
+    public Course(String code, String nm, String desc, String spec, String un)
+    {
+        System.out.println("Creating new class\nCourse Code: " + code);
+        courseCode = code;
+        System.out.println("Description: " + desc);
+        description = desc;
+        System.out.println("Name: " + nm);
+        name = nm;
+        System.out.println("Units: " + un);
+        units = Float.parseFloat(un);
+        System.out.println("Specification: " + spec);
+        when = spec;
+
+        status = CourseStatus.NotTaken;//Since it's being initialized this way, it hasn't been taken.
         System.out.println("Done creating new entry for " + courseCode + " " + name);
     }
 

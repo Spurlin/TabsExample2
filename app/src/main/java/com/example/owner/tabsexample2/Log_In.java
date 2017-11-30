@@ -72,10 +72,10 @@ public class Log_In extends AppCompatActivity implements AsyncResponse {
             e.printStackTrace();
         }
 
-        String result = dbConnector.getResults();
+        //String result = dbConnector.getResults();
 
-        System.out.println("<-RESULTS->");
-        System.out.print(result);
+        //System.out.println("<-RESULTS->");
+        //System.out.print(result);
     }
 
     // user performed a successful log in

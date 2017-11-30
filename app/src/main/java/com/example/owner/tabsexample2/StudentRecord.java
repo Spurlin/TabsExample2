@@ -44,10 +44,13 @@ public class StudentRecord extends AppCompatActivity implements AsyncResponse
             e.printStackTrace();
         }
 
-        //Use stu_id to pull enrolled courses, including class.
-        /*for(int i = 0; i < enrolledTuples.length; i++)
-            allCourses.add(new Course(...));
-        */
+        //Build the degree plan for the student's major:
+        //major = new DegreePlan(majorName, this);//It's broken right now; don't try it.
+    }
+
+    public void addCourse(Course newCourse)
+    {
+        allCourses.add(newCourse);
     }
 
     public Course getCourseByIndex(int i)
