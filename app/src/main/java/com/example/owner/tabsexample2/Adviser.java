@@ -98,8 +98,8 @@ public class Adviser extends AppCompatActivity {
             case R.id.nav_whatif:
                 startWhatIf();
                 break;
-            case R.id.nav_adviser:
-                break;
+            //case R.id.nav_adviser:
+                //break;
             case R.id.nav_signout:
                 toast();
                 break;

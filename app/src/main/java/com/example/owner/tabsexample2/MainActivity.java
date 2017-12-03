@@ -1,8 +1,10 @@
 package com.example.owner.tabsexample2;
 
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -69,12 +71,24 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private PopupWindow popupWindow;
 
+    private StudentRecord record;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
+        if (savedInstanceState == null) {
+            Bundle extras = intent.getExtras();
+            if(extras != null) {
+                record = new StudentRecord(extras.getString("stu_id"), extras.getString("majorName"), extras.getString("fname"), extras.getString("lname"));
+            }
+        } else {
+            record = new StudentRecord((String) savedInstanceState.getSerializable("stu_id"), (String) savedInstanceState.getSerializable("majorName"), (String) savedInstanceState.getSerializable("fname"), (String) savedInstanceState.getSerializable("lname"));
+        }
+
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -90,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         mDrawer.getForeground().setAlpha(0);
         drawerToggle = new ActionBarDrawerToggle(this, mDrawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
@@ -115,9 +130,24 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
-
+        View headerView = nvDrawer.getHeaderView(0);
+        TextView tv = (TextView)headerView.findViewById(R.id.userName);
+        tv.setText(record.getStudentName());
         setupDrawerContent(nvDrawer);
 
+    }
+
+    private void alertMsg(String title, String msg) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(msg);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -143,9 +173,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_whatif:
                 startWhatIf();
                 break;
-            case R.id.nav_adviser:
-                startAdviser();
-                break;
+            //case R.id.nav_adviser:
+                //startAdviser();
+                //break;
             case R.id.nav_signout:
                 toast();
                 break;

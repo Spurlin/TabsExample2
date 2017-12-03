@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -117,6 +118,7 @@ public class WhatIf extends AppCompatActivity {
 
         setupDrawerContent(nvDrawer);
 
+
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -142,9 +144,9 @@ public class WhatIf extends AppCompatActivity {
                 break;
             case R.id.nav_whatif:
                 break;
-            case R.id.nav_adviser:
-                startAdviser();
-                break;
+            //case R.id.nav_adviser:
+                //startAdviser();
+                //break;
             case R.id.nav_signout:
                 toast();
                 break;
@@ -249,6 +251,7 @@ public class WhatIf extends AppCompatActivity {
             }
             return null;
         }
+
     }
 
 }
