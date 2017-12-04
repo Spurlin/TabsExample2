@@ -67,7 +67,7 @@ public class TabAll extends Fragment implements Serializable {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT ) ;
 
-        paramsWrapCARD.setMargins(0, 50, 0, 0);
+        paramsWrapCARD.setMargins(0, 50, 0, 50);
 
         LinearLayout.LayoutParams paramsMatchWrap = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -99,7 +99,7 @@ public class TabAll extends Fragment implements Serializable {
             newCard.setRadius(50);
             newCard.setContentPadding(10, 10 , 10 , 10 );
             newCard.setMaxCardElevation(20);
-            newCard.setElevation(20);
+            newCard.setElevation(15);
 
             RelativeLayout relativeLayout = new RelativeLayout(container.getContext());
             relativeLayout.setLayoutParams(paramsWrap);
@@ -235,7 +235,8 @@ public class TabAll extends Fragment implements Serializable {
             newRow.addView(newDescTV);
             newRow.addView(newGradeTV);
             courseTable.addView(newRow);
-            courseTable.addView(divider);
+
+            if (i != record.getNumberOfCourses() - 1) { courseTable.addView(divider); }
         }
 
         insideLinLayout.addView(courseTable);

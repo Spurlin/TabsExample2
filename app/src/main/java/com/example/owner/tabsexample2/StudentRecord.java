@@ -18,6 +18,7 @@ public class StudentRecord extends AppCompatActivity implements AsyncResponse, S
     private DegreePlan major;
     private DegreePlan whatIf = null;
     private String[] degreeNames;
+    private String mDegreeName;
 
     public StudentRecord(String stu_id, String majorName, String fname, String lname)
     {
@@ -25,6 +26,8 @@ public class StudentRecord extends AppCompatActivity implements AsyncResponse, S
         System.out.println(studentName);
         System.out.println(stu_id);
         System.out.println(majorName);
+
+        mDegreeName = majorName;
 
         //Collect all enrolled courses:
         String type = "allcourses";
@@ -155,8 +158,6 @@ public class StudentRecord extends AppCompatActivity implements AsyncResponse, S
             return null;
     }
 
-    public String getStudentName() {return studentName; }
-
     @Override
     public void processFinish(boolean res)
     {
@@ -174,4 +175,12 @@ public class StudentRecord extends AppCompatActivity implements AsyncResponse, S
     public float getCourseUnits(int i) { return allCourses.get(i).getUnits(); }
 
     public String getCourseWhen(int i) { return allCourses.get(i).getWhen(); }
+
+    public String[] getDegreeNames() { return degreeNames; }
+
+    public float getCreditsEarned() { return major.getCreditsEarned(); }
+
+    public float getCreditsNeeded() { return major.getCreditsNeeded(); }
+
+    public String getMajorName() { return mDegreeName; }
 }

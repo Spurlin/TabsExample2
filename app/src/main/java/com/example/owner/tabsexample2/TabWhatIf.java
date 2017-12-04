@@ -1,5 +1,6 @@
 package com.example.owner.tabsexample2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,8 +20,7 @@ public class TabWhatIf  extends Fragment {
     private Spinner spMajor;
 
     //Possible Majors
-    String majors[] = {"Art", "Accounting", "Chemistry", "Finance",
-            "History", "Math", "Physics", "Speech Communication"};
+    String degreeNames[];
 
     ArrayAdapter<String> adapterMajor;
     String sMajor;
@@ -30,9 +30,14 @@ public class TabWhatIf  extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.what_if, container, false);
 
+        Intent intent = getActivity().getIntent();
+
+        final StudentRecord record = (StudentRecord) intent.getSerializableExtra("StudentRecord");
+        degreeNames = record.getDegreeNames();
+
         spMajor = (Spinner) rootView.findViewById(R.id.whatIf_Spinner);
 
-        adapterMajor = new ArrayAdapter<String>(this.getActivity(), R.layout.spinner_item, majors);
+        adapterMajor = new ArrayAdapter<String>(this.getActivity(), R.layout.spinner_item, degreeNames);
 
         adapterMajor.setDropDownViewResource(R.layout.spinner_dropdown_items);
 
