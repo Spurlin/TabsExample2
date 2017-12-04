@@ -28,36 +28,52 @@
                 android:id="@+id/headerLayout">
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/courseCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ENGL1301"
+                    android:text="CourseCode"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/courseName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="College Composition I"
-                    android:layout_toEndOf="@+id/textView6"
+                    android:text="CourseName"
+                    android:layout_toEndOf="@+id/courseCode"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:layout_marginLeft="20sp" />
 
             </LinearLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/headerLayout"
+                android:paddingTop="10dp">
+
+                <View
+                    android:layout_width="1000px"
+                    android:layout_height="20px"
+                    android:layout_centerInParent="true"
+                    android:background="@color/colorAccent"
+                    android:elevation="5px"/>
+
+
+            </RelativeLayout>
+
             // units
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:id="@+id/whenLayout"
+                android:id="@+id/unitsLayout"
                 android:layout_below="@id/headerLayout"
                 android:layout_marginTop="25sp">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/courseUnitTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:width="@android:dimen/app_icon_size"
@@ -66,13 +82,13 @@
                     android:textStyle="bold"/>
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/courseUnits"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/textView"
+                    android:layout_toEndOf="@id/courseUnitTV"
                     android:layout_marginLeft="10sp"
                     android:width="@android:dimen/app_icon_size"
-                    android:text="3.00" />
+                    android:text="Units" />
             </LinearLayout>
 
             // when
@@ -80,11 +96,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:id="@+id/unitsLayout"
-                android:layout_below="@id/whenLayout">
+                android:id="@+id/whenLayout"
+                android:layout_below="@id/unitsLayout">
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/courseWhenTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:width="@android:dimen/app_icon_size"
@@ -93,23 +109,38 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/courseWhen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/textView"
-                    android:layout_toEndOf="@id/textView4"
+                    android:layout_below="@id/courseUnitTV"
+                    android:layout_toEndOf="@id/courseWhenTV"
                     android:layout_marginLeft="10sp"
-                    android:text="Spring, Fall" />
+                    android:text="When" />
             </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/whenLayout"
+                android:paddingTop="10dp">
+
+                <View
+                    android:layout_width="1000px"
+                    android:layout_height="20px"
+                    android:layout_centerInParent="true"
+                    android:background="@color/colorAccent"
+                    android:elevation="5px"/>
+
+            </RelativeLayout>
 
             // description
             <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/courseDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/unitsLayout"
+            android:layout_below="@id/whenLayout"
             android:layout_marginTop="25sp"
-            android:text='This course studies rhetorical conventions of expository writing and argumentation. Students improve their writing skills through an intensive writing process addressing grammar, mechanics, paragraphing, and logical structure in an essay. All courses require a grade of "C" or better to count toward the Core Curriculum. ' />
+            android:text="Description"/>
 
     </RelativeLayout>
     </android.support.v7.widget.CardView>

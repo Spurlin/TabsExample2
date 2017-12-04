@@ -1,116 +1,1198 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/whatIf_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/whatif_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@drawable/gradient"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    tools:context="com.example.owner.tabsexample2.MainActivity$PlaceholderFragment">
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:id="@+id/whatIFHeader">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textSize="25dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:text="MAJOR: "/>-->
-        <!---->
-        <!--<Spinner-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:spinnerMode="dropdown"-->
-            <!--android:background="@android:drawable/btn_dropdown"/>-->
-    <!--</LinearLayout>-->
-
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:fillViewport="true"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp">
 
-        <android.support.design.widget.CollapsingToolbarLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="115dp"
-            android:id="@+id/mainCollapse"
-            android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed|snap"
-            app:contentScrim="@color/colorPrimary"
-            app:titleEnabled="false">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/whatif_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:fitsSystemWindows="true"
-                android:layout_gravity="top"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
-
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:text="Art"-->
-                    <!--/>-->
-
-                <Spinner
-                    android:id="@+id/whatIf_Spinner"
-                    android:layout_width="200dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="right"
-                    android:dropDownVerticalOffset="?attr/actionBarSize"
-                    android:popupBackground="@android:color/background_light"
-                    android:spinnerMode="dropdown"
-                    android:visibility="visible" />
-            </android.support.v7.widget.Toolbar>
-
-            <!--android:popupBackground="@color/colorAccent"-->
-            <!--android:background="@color/colorAccent"-->
-
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tabs_whatif"
-                android:layout_width="match_parent"
+            // header card
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:elevation="14dp"/>
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:padding="10dp"
+                app:cardCornerRadius="20dp"
+                android:elevation="20dp">
 
-        </android.support.design.widget.CollapsingToolbarLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15sp"
+                    android:paddingRight="15sp"
+                    android:paddingTop="15sp"
+                    android:paddingBottom="15sp">
 
-    </android.support.design.widget.AppBarLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/header"
+                        android:scrollbarAlwaysDrawVerticalTrack="true">
+                        setBackground="@drawable/gradient"
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/container_whatif"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+                        //Progress bar and course info goes here
+
+                        <TextView
+                            android:id="@+id/pageName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="What If"
+                            android:textColor="@android:color/black"
+                            android:textSize="30sp" />
+
+                        <Spinner
+                            android:id="@+id/whatIf_Spinner"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginLeft="25dp"
+                            android:dropDownVerticalOffset="?attr/actionBarSize"
+                            android:popupBackground="@android:color/background_light"
+                            android:spinnerMode="dropdown"
+                            android:visibility="visible" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_below="@+id/header"
+                        android:scrollbarAlwaysDrawVerticalTrack="true">
+                        setBackground="@drawable/gradient"
+
+                        <ProgressBar
+                            android:id="@+id/progressBar"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:indeterminate="false"
+                            android:max="120"
+                            android:progress="12" />
+
+                        <TextView
+                            android:id="@+id/ratio"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="12/120 credits"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorLink="@android:color/black" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                app:cardCornerRadius="20dp"
+                android:elevation="20dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15sp"
+                    android:paddingRight="15sp"
+                    android:paddingTop="15sp"
+                    android:paddingBottom="15sp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:stretchColumns="*">
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/course"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="Course"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:id="@+id/description"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="Description"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:id="@+id/grade"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="Grade"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text=" ENGL1301"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:clickable="true"
+                                    android:linksClickable="true"
+                                    android:onClick="onClick"
+                                    android:text="College Composition I"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textColorLink="@android:color/holo_blue_dark"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="A"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal"/>
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" MATH1314"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="College Algebra"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="B"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" MATH1316"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Trigonometry"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="A"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" MATH2412"
+                                    android:textAlignment="textStart"
+                                    android:textSize="14sp"
+                                    android:textColor="@android:color/black" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Precalculus"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="B"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal" />
+
+                            </TableRow>
+                        </TableLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+            // START MOCK DATA FOR SCROLLING PURPOSES
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                app:cardCornerRadius="20dp"
+                android:elevation="20dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15sp"
+                    android:paddingRight="15sp"
+                    android:paddingTop="15sp"
+                    android:paddingBottom="15sp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:stretchColumns="*">
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/course"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="Course"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:id="@+id/description"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="Description"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:id="@+id/grade"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="Grade"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text=" ENGL1301"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:clickable="true"
+                                    android:linksClickable="true"
+                                    android:onClick="onClick"
+                                    android:text="College Composition I"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textColorLink="@android:color/holo_blue_dark"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="A"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal"/>
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" MATH1314"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="College Algebra"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="B"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" MATH1316"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Trigonometry"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="A"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" MATH2412"
+                                    android:textAlignment="textStart"
+                                    android:textSize="14sp"
+                                    android:textColor="@android:color/black" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Precalculus"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="B"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal" />
+
+                            </TableRow>
+                        </TableLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                app:cardCornerRadius="20dp"
+                android:elevation="20dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15sp"
+                    android:paddingRight="15sp"
+                    android:paddingTop="15sp"
+                    android:paddingBottom="15sp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:stretchColumns="*">
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/course"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="Course"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:id="@+id/description"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="Description"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:id="@+id/grade"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="Grade"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text=" ENGL1301"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:clickable="true"
+                                    android:linksClickable="true"
+                                    android:onClick="onClick"
+                                    android:text="College Composition I"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textColorLink="@android:color/holo_blue_dark"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="A"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal"/>
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" MATH1314"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="College Algebra"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="B"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" MATH1316"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Trigonometry"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="A"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" MATH2412"
+                                    android:textAlignment="textStart"
+                                    android:textSize="14sp"
+                                    android:textColor="@android:color/black" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Precalculus"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="B"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal" />
+
+                            </TableRow>
+                        </TableLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                app:cardCornerRadius="20dp"
+                android:elevation="20dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15sp"
+                    android:paddingRight="15sp"
+                    android:paddingTop="15sp"
+                    android:paddingBottom="15sp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:stretchColumns="*">
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/course"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="Course"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:id="@+id/description"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="Description"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:id="@+id/grade"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="Grade"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text=" ENGL1301"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:clickable="true"
+                                    android:linksClickable="true"
+                                    android:onClick="onClick"
+                                    android:text="College Composition I"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textColorLink="@android:color/holo_blue_dark"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="A"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal"/>
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" MATH1314"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="College Algebra"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="B"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" MATH1316"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Trigonometry"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="A"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" MATH2412"
+                                    android:textAlignment="textStart"
+                                    android:textSize="14sp"
+                                    android:textColor="@android:color/black" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Precalculus"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="B"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal" />
+
+                            </TableRow>
+                        </TableLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                app:cardCornerRadius="20dp"
+                android:elevation="20dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15sp"
+                    android:paddingRight="15sp"
+                    android:paddingTop="15sp"
+                    android:paddingBottom="15sp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:stretchColumns="*">
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/course"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="Course"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:id="@+id/description"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="Description"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:id="@+id/grade"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="Grade"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text=" ENGL1301"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:clickable="true"
+                                    android:linksClickable="true"
+                                    android:onClick="onClick"
+                                    android:text="College Composition I"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textColorLink="@android:color/holo_blue_dark"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="A"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal"/>
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" MATH1314"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="College Algebra"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="B"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" MATH1316"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Trigonometry"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="A"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="@dimen/space_between_lines">
+
+                                <TextView
+                                    android:id="@+id/course2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" MATH2412"
+                                    android:textAlignment="textStart"
+                                    android:textSize="14sp"
+                                    android:textColor="@android:color/black" />
+
+                                <TextView
+                                    android:id="@+id/description2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Precalculus"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/linkColor"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/grade2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:width="@android:dimen/app_icon_size"
+                                    android:text="B"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:layout_gravity="center_horizontal" />
+
+                            </TableRow>
+                        </TableLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView> // end of mock
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
-
-    //fix
-    <!-- The navigation drawer that comes from the left -->
-    <!-- Note that `android:layout_gravity` needs to be set to 'start' -->
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nvView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        app:menu="@menu/activity_menu_drawer"
-        app:headerLayout="@layout/activity_menu"
-        android:layout_gravity="start">
-        <!--android:layout_gravity="start"-->
-
-    </android.support.design.widget.NavigationView>
-
-</android.support.v4.widget.DrawerLayout>

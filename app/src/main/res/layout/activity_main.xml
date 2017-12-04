@@ -98,19 +98,4 @@
 
 </android.support.design.widget.CoordinatorLayout>
 
-    //fix
-    <!-- The navigation drawer that comes from the left -->
-    <!-- Note that `android:layout_gravity` needs to be set to 'start' -->
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nvView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        app:menu="@menu/activity_menu_drawer"
-        app:headerLayout="@layout/activity_menu"
-        android:layout_gravity="start">
-        <!--android:layout_gravity="start"-->
-
-    </android.support.design.widget.NavigationView>
-
 </android.support.v4.widget.DrawerLayout>
