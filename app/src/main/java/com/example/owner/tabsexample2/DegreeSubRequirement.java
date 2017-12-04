@@ -2,6 +2,7 @@ package com.example.owner.tabsexample2;
 
 import android.support.v7.app.AppCompatActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -9,7 +10,7 @@ import java.util.concurrent.ExecutionException;
  * Created by wamtu on 11/29/2017.
  */
 
-public class DegreeSubRequirement
+public class DegreeSubRequirement implements Serializable
 {
     private final String lnCode;
     private ArrayList<Course> courses;

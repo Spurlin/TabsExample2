@@ -2,6 +2,7 @@ package com.example.owner.tabsexample2;
 
 import android.support.v7.app.AppCompatActivity;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -10,7 +11,7 @@ import java.util.concurrent.ExecutionException;
  * Created by wamtu on 11/22/2017.
  */
 
-public class StudentRecord extends AppCompatActivity implements AsyncResponse
+public class StudentRecord extends AppCompatActivity implements AsyncResponse, Serializable
 {
     private final String studentName;
     private ArrayList<Course> allCourses;
@@ -83,6 +84,10 @@ public class StudentRecord extends AppCompatActivity implements AsyncResponse
         return allCourses.get(i);
     }
 
+    public int getNumberOfCourses() {
+        return allCourses.size();
+    }
+
     public Course getCourse(String code)
     {
         int match = -1;
@@ -148,9 +153,23 @@ public class StudentRecord extends AppCompatActivity implements AsyncResponse
             return null;
     }
 
+    public String getStudentName() {return studentName; }
+
     @Override
     public void processFinish(boolean res)
     {
 
     }
+
+    public String getCourseName(int i) { return allCourses.get(i).getName(); }
+
+    public String getCourseDesc(int i) { return allCourses.get(i).getDescription(); }
+
+    public String getCourseStatus(int i) { return allCourses.get(i).getStatus().toString(); }
+
+    public String getCourseCode(int i) { return allCourses.get(i).getCode(); }
+
+    public float getCourseUnits(int i) { return allCourses.get(i).getUnits(); }
+
+    public String getCourseWhen(int i) { return allCourses.get(i).getWhen(); }
 }

@@ -2,10 +2,11 @@ package com.example.owner.tabsexample2;
 
 import android.support.v7.app.AppCompatActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-public class Course extends AppCompatActivity implements AsyncResponse
+public class Course extends AppCompatActivity implements AsyncResponse, Serializable
 {
 
     private final String courseCode;
@@ -178,6 +179,5 @@ public class Course extends AppCompatActivity implements AsyncResponse
     @Override
     public void processFinish(boolean res)
     {
-
     }
 }

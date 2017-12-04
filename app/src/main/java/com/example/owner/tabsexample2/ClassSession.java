@@ -1,10 +1,12 @@
 package com.example.owner.tabsexample2;
 
+import java.io.Serializable;
+
 /**
  * Created by wamtu on 11/17/2017.
  */
 
-public class ClassSession
+public class ClassSession implements Serializable
 {
     private final String instructorName;
     private final String semester;

@@ -10,13 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.app.AlertDialog;
 
+import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 
 /**
  * Created by j_spu on 11/5/2017.
  */
 
-public class Log_In extends AppCompatActivity implements AsyncResponse {
+public class Log_In extends AppCompatActivity implements AsyncResponse, Serializable {
     // Global Variables
     private String userName;
     private String pswd;
@@ -86,6 +87,7 @@ public class Log_In extends AppCompatActivity implements AsyncResponse {
         clearAllCredentials();
 
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("StudentRecord", record);
         startActivity(intent);
     }
 

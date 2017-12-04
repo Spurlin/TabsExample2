@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,7 +23,7 @@ import java.net.URLEncoder;
  * Created by lwu on 11/10/2017.
  */
 
-public class DBConnector extends AsyncTask<String,Void,String> {
+public class DBConnector extends AsyncTask<String,Void,String> implements Serializable {
     public AsyncResponse delegate = null;
     private String result = "";
     Context context;

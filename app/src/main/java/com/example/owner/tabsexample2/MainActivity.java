@@ -1,9 +1,11 @@
 package com.example.owner.tabsexample2;
 
+import android.app.ActionBar;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -17,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
@@ -30,15 +33,19 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,7 +54,9 @@ import com.example.owner.tabsexample2.TabAll;
 import com.example.owner.tabsexample2.TabCore;
 import com.example.owner.tabsexample2.TabMajor;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.Serializable;
+
+public class MainActivity extends AppCompatActivity implements Serializable {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -68,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
     private TabLayout tabLayout;
     private PopupWindow popupWindow;
+    private Context mContext;
+    LinearLayout mLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +86,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
+
+        StudentRecord record = (StudentRecord) intent.getSerializableExtra("StudentRecord");
+        setTitle(record.getStudentName());
+
+        Intent allIntent = new Intent(this, TabAll.class);
+        allIntent.putExtra("StudentRecord", record);
+
+        mContext = getApplicationContext();
+        mLinearLayout = (LinearLayout) findViewById(R.id.all_main_LinLayout);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -87,16 +107,8 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-
-
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawer.getForeground().setAlpha(0);
-        drawerToggle = new ActionBarDrawerToggle(this, mDrawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
-        mDrawer.addDrawerListener(drawerToggle);
-        drawerToggle.syncState();
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final NestedScrollView myScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
 
@@ -114,62 +126,8 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        nvDrawer = (NavigationView) findViewById(R.id.nvView);
-
-        setupDrawerContent(nvDrawer);
-
     }
 
-    private void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        selectDrawerItem(menuItem);
-                        return true;
-                    }
-                });
-    }
-
-    public void selectDrawerItem(MenuItem menuItem) {
-        // Create a new fragment and specify the fragment to show based on nav item clicked
-//        Fragment fragment = null;
-//        Class fragmentClass;
-        Handler mHandler = new Handler();
-
-        switch(menuItem.getItemId()) {
-            case R.id.nav_current:
-                break;
-            case R.id.nav_whatif:
-                startWhatIf();
-                break;
-            case R.id.nav_adviser:
-                startAdviser();
-                break;
-            case R.id.nav_signout:
-                toast();
-                break;
-        }
-
-        if (menuItem.getItemId() == R.id.nav_signout) {
-            mDrawer.closeDrawers();
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    log_off();
-                }
-            }, 1000);
-        } else {
-
-
-            // Set action bar title
-            setTitle(menuItem.getTitle());
-            // Close the navigation drawer
-            mDrawer.closeDrawers();
-        }
-
-
-    }
 
     private void toast() {Toast.makeText(this, "Logging Off...", Toast.LENGTH_SHORT).show();}
 
@@ -178,15 +136,19 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void startAdviser() {
-        Intent intent = new Intent(this, Adviser.class);
-        startActivity(intent);
+//    private void startAdviser() {
+//        Intent intent = new Intent(this, Adviser.class);
+//        startActivity(intent);
+//    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_menu_drawer, menu);
+        return super .onCreateOptionsMenu(menu);
     }
 
-    private void startWhatIf() {
-        Intent intent = new Intent(this, WhatIf.class);
-        startActivity(intent);
-    }
+
 
         @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -196,8 +158,8 @@ public class MainActivity extends AppCompatActivity {
 
         // The action bar home/up action should open or close the drawer.
         switch (item.getItemId()) {
-            case android.R.id.home:
-                mDrawer.openDrawer(GravityCompat.START);
+            case R.id.nav_signout:
+                log_off();
                 return true;
         }
 
@@ -225,11 +187,11 @@ public class MainActivity extends AppCompatActivity {
                     TabAll tabA = new TabAll();
                     return tabA;
                 case 1:
-                    TabCore tabC = new TabCore();
-                    return tabC;
-                case 2:
                     TabMajor tabM = new TabMajor();
                     return tabM;
+                case 2:
+                    TabWhatIf tabW = new TabWhatIf();
+                    return tabW;
                 default:
                     return null;
             }
@@ -238,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 4 total pages.
+            // Show 3 total pages.
             return 3;
         }
 
@@ -248,9 +210,9 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return "All";
                 case 1:
-                    return "Core";
-                case 2:
                     return "Major";
+                case 2:
+                    return "What If";
             }
             return null;
         }
@@ -287,4 +249,35 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    public CardView createCard(int i) {
+
+        CardView card = new CardView(mContext);
+
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+
+        card.setLayoutParams(params);
+        card.setRadius(20);
+        card.setContentPadding(10, 10 , 10 , 10 );
+        card.setMaxCardElevation(20);
+        card.setMaxCardElevation(20);
+
+        TextView tv = new TextView(mContext);
+        tv.setLayoutParams(params);
+        tv.setText("This is card number " + i);
+        tv.setTextColor(Color.RED);
+
+        card.addView(tv);
+
+        // create linear layout
+        // create TableLayout
+        // add default header row 1
+        // create the remaining rows based on the respective data
+
+        return card;
+    }
+
 }

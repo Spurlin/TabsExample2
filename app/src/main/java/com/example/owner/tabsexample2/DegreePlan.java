@@ -2,6 +2,7 @@ package com.example.owner.tabsexample2;
 
 import android.support.v7.app.AppCompatActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -9,7 +10,7 @@ import java.util.concurrent.ExecutionException;
  * Created by wamtu on 11/17/2017.
  */
 
-public class DegreePlan extends AppCompatActivity implements AsyncResponse
+public class DegreePlan extends AppCompatActivity implements AsyncResponse, Serializable
 {
     private final String name;
     private ArrayList<DegreeRequirement> requirements;

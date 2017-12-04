@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <!-- The navigation drawer -->
     <RelativeLayout
@@ -14,19 +14,9 @@
         android:background="@color/colorPrimary"
         android:padding="8dp">
 
-        <ImageView
-            android:id="@+id/avatar"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="15dp"
-            android:src="@mipmap/ic_account_circle_white_24dp" />
-
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="42dp"
-            android:layout_below="@id/avatar"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
@@ -42,14 +32,4 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="280dp"
-        android:layout_height="match_parent"
-        android:id="@+id/drawerPane">
-
-        <!-- Profile Box -->
-
-    </RelativeLayout>
-
 </LinearLayout>

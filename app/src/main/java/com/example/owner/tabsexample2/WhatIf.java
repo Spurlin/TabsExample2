@@ -51,9 +51,6 @@ public class WhatIf extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.whatif_toolbar);
-        setSupportActionBar(toolbar);
-
         setTitle(getTitle() + "...");
 
         spMajor = (Spinner) findViewById(R.id.whatIf_Spinner);
@@ -86,21 +83,21 @@ public class WhatIf extends AppCompatActivity {
         mSectionsPagerAdapter = new WhatIf.SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container_whatif);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+//        mViewPager = (ViewPager) findViewById(R.id.container_whatif);
+//        mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerToggle = new ActionBarDrawerToggle(this, mDrawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawerToggle = new ActionBarDrawerToggle(this, mDrawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
-        mDrawer.addDrawerListener(drawerToggle);
-        drawerToggle.syncState();
+//        mDrawer.addDrawerListener(drawerToggle);
+//        drawerToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final NestedScrollView myScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs_whatif);
-        tabLayout.setupWithViewPager(mViewPager);
+//        tabLayout = (TabLayout) findViewById(R.id.tabs_whatif);
+//        tabLayout.setupWithViewPager(mViewPager);
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -115,56 +112,56 @@ public class WhatIf extends AppCompatActivity {
 
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
 
-        setupDrawerContent(nvDrawer);
+//        setupDrawerContent(nvDrawer);
 
     }
 
-    private void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        selectDrawerItem(menuItem);
-                        return true;
-                    }
-                });
-    }
+//    private void setupDrawerContent(NavigationView navigationView) {
+//        navigationView.setNavigationItemSelectedListener(
+//                new NavigationView.OnNavigationItemSelectedListener() {
+//                    @Override
+//                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+//                        selectDrawerItem(menuItem);
+//                        return true;
+//                    }
+//                });
+//    }
 
-    public void selectDrawerItem(MenuItem menuItem) {
-        // Create a new fragment and specify the fragment to show based on nav item clicked
-//        Fragment fragment = null;
-//        Class fragmentClass;
-        Handler mHandler = new Handler();
-
-        switch(menuItem.getItemId()) {
-            case R.id.nav_current:
-                startCurrent();
-                break;
-            case R.id.nav_whatif:
-                break;
-            case R.id.nav_adviser:
-                startAdviser();
-                break;
-            case R.id.nav_signout:
-                toast();
-                break;
-        }
-
-        if (menuItem.getItemId() == R.id.nav_signout) {
-            mDrawer.closeDrawers();
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    log_off();
-                }
-            }, 1000);
-        }
-
-            // Set action bar title
-            setTitle(menuItem.getTitle());
-            // Close the navigation drawer
-            mDrawer.closeDrawers();
-    }
+//    public void selectDrawerItem(MenuItem menuItem) {
+//        // Create a new fragment and specify the fragment to show based on nav item clicked
+////        Fragment fragment = null;
+////        Class fragmentClass;
+//        Handler mHandler = new Handler();
+//
+//        switch(menuItem.getItemId()) {
+//            case R.id.nav_current:
+//                startCurrent();
+//                break;
+//            case R.id.nav_whatif:
+//                break;
+//            case R.id.nav_adviser:
+//                startAdviser();
+//                break;
+//            case R.id.nav_signout:
+//                toast();
+//                break;
+//        }
+//
+//        if (menuItem.getItemId() == R.id.nav_signout) {
+//            mDrawer.closeDrawers();
+//            mHandler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    log_off();
+//                }
+//            }, 1000);
+//        }
+//
+//            // Set action bar title
+//            setTitle(menuItem.getTitle());
+//            // Close the navigation drawer
+//            mDrawer.closeDrawers();
+//    }
 
     private void toast() {
         Toast.makeText(this, "Logging Off...", Toast.LENGTH_SHORT).show();}

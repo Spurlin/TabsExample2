@@ -49,17 +49,17 @@ public class Adviser extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.adv_toolbar);
         setSupportActionBar(toolbar);
 
-        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerToggle = new ActionBarDrawerToggle(this, mDrawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawerToggle = new ActionBarDrawerToggle(this, mDrawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
-        mDrawer.addDrawerListener(drawerToggle);
-        drawerToggle.syncState();
+//        mDrawer.addDrawerListener(drawerToggle);
+//        drawerToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+//        nvDrawer = (NavigationView) findViewById(R.id.nvView);
 
-        setupDrawerContent(nvDrawer);
+//        setupDrawerContent(nvDrawer);
 
 
         advName = (TextView) findViewById(R.id.adviserName);
@@ -74,52 +74,52 @@ public class Adviser extends AppCompatActivity {
 
     }
 
-    private void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        selectDrawerItem(menuItem);
-                        return true;
-                    }
-                });
-    }
+//    private void setupDrawerContent(NavigationView navigationView) {
+//        navigationView.setNavigationItemSelectedListener(
+//                new NavigationView.OnNavigationItemSelectedListener() {
+//                    @Override
+//                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+//                        selectDrawerItem(menuItem);
+//                        return true;
+//                    }
+//                });
+//    }
 
-    public void selectDrawerItem(MenuItem menuItem) {
-        // Create a new fragment and specify the fragment to show based on nav item clicked
-//        Fragment fragment = null;
-//        Class fragmentClass;
-        Handler mHandler = new Handler();
-
-        switch(menuItem.getItemId()) {
-            case R.id.nav_current:
-                startCurrent();
-                break;
-            case R.id.nav_whatif:
-                startWhatIf();
-                break;
-            case R.id.nav_adviser:
-                break;
-            case R.id.nav_signout:
-                toast();
-                break;
-        }
-
-        if (menuItem.getItemId() == R.id.nav_signout) {
-            mDrawer.closeDrawers();
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    log_off();
-                }
-            }, 1000);
-        }
-
-        // Set action bar title
-        setTitle(menuItem.getTitle());
-        // Close the navigation drawer
-        mDrawer.closeDrawers();
-    }
+//    public void selectDrawerItem(MenuItem menuItem) {
+//        // Create a new fragment and specify the fragment to show based on nav item clicked
+////        Fragment fragment = null;
+////        Class fragmentClass;
+//        Handler mHandler = new Handler();
+//
+//        switch(menuItem.getItemId()) {
+//            case R.id.nav_current:
+//                startCurrent();
+//                break;
+//            case R.id.nav_whatif:
+//                startWhatIf();
+//                break;
+//            case R.id.nav_adviser:
+//                break;
+//            case R.id.nav_signout:
+//                toast();
+//                break;
+//        }
+//
+//        if (menuItem.getItemId() == R.id.nav_signout) {
+//            mDrawer.closeDrawers();
+//            mHandler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    log_off();
+//                }
+//            }, 1000);
+//        }
+//
+//        // Set action bar title
+//        setTitle(menuItem.getTitle());
+//        // Close the navigation drawer
+//        mDrawer.closeDrawers();
+//    }
 
     private void toast() {Toast.makeText(this, "Logging Off...", Toast.LENGTH_SHORT).show();}
 
