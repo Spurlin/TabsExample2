@@ -1,6 +1,10 @@
 package com.example.owner.tabsexample2;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -26,8 +30,9 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
     private EditText pswd_Btn;
     private String defaultEmail = "Email";
     private int failedAttemptCount = 0;
+    private String[] fields2;
 
-    private StudentRecord record;
+    //private StudentRecord record;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +48,37 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // get the entered values for username and password
-                userName = usrName_Btn.getText().toString();
-                pswd = pswd_Btn.getText().toString();
-                checkCredentials(userName,pswd);
-
+                if (isConnected()) {
+                    // get the entered values for username and password
+                    userName = usrName_Btn.getText().toString();
+                    pswd = pswd_Btn.getText().toString();
+                    checkCredentials(userName,pswd);
+                }
+                else {
+                    alertMsg("Error","You need to be connected to the internet to log in.");
+                }
         }});
-
-
     }
 
+    private boolean isConnected() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    private void alertMsg(String title, String msg) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(msg);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
     private void checkCredentials(String userName, String password) {
 
         String type = "login";
@@ -65,7 +91,8 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
             String[] fields = result.split("~");
             System.out.println("Fields: " + fields.length);
             if(fields.length >= 5) { //Don't try this if we didn't get enough fields to set up the student.
-                record = new StudentRecord(fields[1], fields[2], fields[3], fields[4]);//Start building the student record.
+                fields2 = fields;
+                //record = new StudentRecord(fields[1], fields[2], fields[3], fields[4]);//Start building the student record.
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -87,7 +114,14 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
         clearAllCredentials();
 
         Intent intent = new Intent(this, MainActivity.class);
+<<<<<<< HEAD
         intent.putExtra("StudentRecord", record);
+=======
+        intent.putExtra("stu_id",fields2[1]);
+        intent.putExtra("majorName",fields2[2]);
+        intent.putExtra("fname",fields2[3]);
+        intent.putExtra("lname",fields2[4]);
+>>>>>>> origin/master
         startActivity(intent);
     }
 

@@ -74,6 +74,7 @@ public class Adviser extends AppCompatActivity {
 
     }
 
+<<<<<<< HEAD
 //    private void setupDrawerContent(NavigationView navigationView) {
 //        navigationView.setNavigationItemSelectedListener(
 //                new NavigationView.OnNavigationItemSelectedListener() {
@@ -120,6 +121,54 @@ public class Adviser extends AppCompatActivity {
 //        // Close the navigation drawer
 //        mDrawer.closeDrawers();
 //    }
+=======
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+                });
+    }
+
+    public void selectDrawerItem(MenuItem menuItem) {
+        // Create a new fragment and specify the fragment to show based on nav item clicked
+//        Fragment fragment = null;
+//        Class fragmentClass;
+        Handler mHandler = new Handler();
+
+        switch(menuItem.getItemId()) {
+            case R.id.nav_current:
+                startCurrent();
+                break;
+            case R.id.nav_whatif:
+                startWhatIf();
+                break;
+            //case R.id.nav_adviser:
+                //break;
+            case R.id.nav_signout:
+                toast();
+                break;
+        }
+
+        if (menuItem.getItemId() == R.id.nav_signout) {
+            mDrawer.closeDrawers();
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    log_off();
+                }
+            }, 1000);
+        }
+
+        // Set action bar title
+        setTitle(menuItem.getTitle());
+        // Close the navigation drawer
+        mDrawer.closeDrawers();
+    }
+>>>>>>> origin/master
 
     private void toast() {Toast.makeText(this, "Logging Off...", Toast.LENGTH_SHORT).show();}
 

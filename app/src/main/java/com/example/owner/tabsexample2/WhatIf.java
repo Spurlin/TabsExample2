@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -112,10 +113,18 @@ public class WhatIf extends AppCompatActivity {
 
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
 
+<<<<<<< HEAD
 //        setupDrawerContent(nvDrawer);
+=======
+        setupDrawerContent(nvDrawer);
+
+
+    }
+>>>>>>> origin/master
 
     }
 
+<<<<<<< HEAD
 //    private void setupDrawerContent(NavigationView navigationView) {
 //        navigationView.setNavigationItemSelectedListener(
 //                new NavigationView.OnNavigationItemSelectedListener() {
@@ -162,6 +171,43 @@ public class WhatIf extends AppCompatActivity {
 //            // Close the navigation drawer
 //            mDrawer.closeDrawers();
 //    }
+=======
+    public void selectDrawerItem(MenuItem menuItem) {
+        // Create a new fragment and specify the fragment to show based on nav item clicked
+//        Fragment fragment = null;
+//        Class fragmentClass;
+        Handler mHandler = new Handler();
+
+        switch(menuItem.getItemId()) {
+            case R.id.nav_current:
+                startCurrent();
+                break;
+            case R.id.nav_whatif:
+                break;
+            //case R.id.nav_adviser:
+                //startAdviser();
+                //break;
+            case R.id.nav_signout:
+                toast();
+                break;
+        }
+
+        if (menuItem.getItemId() == R.id.nav_signout) {
+            mDrawer.closeDrawers();
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    log_off();
+                }
+            }, 1000);
+        }
+
+            // Set action bar title
+            setTitle(menuItem.getTitle());
+            // Close the navigation drawer
+            mDrawer.closeDrawers();
+    }
+>>>>>>> origin/master
 
     private void toast() {
         Toast.makeText(this, "Logging Off...", Toast.LENGTH_SHORT).show();}
@@ -246,6 +292,7 @@ public class WhatIf extends AppCompatActivity {
             }
             return null;
         }
+
     }
 
 }

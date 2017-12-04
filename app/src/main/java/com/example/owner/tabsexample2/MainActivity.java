@@ -1,9 +1,14 @@
 package com.example.owner.tabsexample2;
 
+<<<<<<< HEAD
 import android.app.ActionBar;
+=======
+import android.app.AlertDialog;
+>>>>>>> origin/master
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
@@ -80,12 +85,24 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private Context mContext;
     LinearLayout mLinearLayout;
 
+    private StudentRecord record;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
+        if (savedInstanceState == null) {
+            Bundle extras = intent.getExtras();
+            if(extras != null) {
+                record = new StudentRecord(extras.getString("stu_id"), extras.getString("majorName"), extras.getString("fname"), extras.getString("lname"));
+            }
+        } else {
+            record = new StudentRecord((String) savedInstanceState.getSerializable("stu_id"), (String) savedInstanceState.getSerializable("majorName"), (String) savedInstanceState.getSerializable("fname"), (String) savedInstanceState.getSerializable("lname"));
+        }
+
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         StudentRecord record = (StudentRecord) intent.getSerializableExtra("StudentRecord");
         setTitle(record.getStudentName());
@@ -108,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         mDrawer.getForeground().setAlpha(0);
 
         final NestedScrollView myScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
@@ -126,8 +144,82 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 //            }
 //        });
 
+<<<<<<< HEAD
     }
 
+=======
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        View headerView = nvDrawer.getHeaderView(0);
+        TextView tv = (TextView)headerView.findViewById(R.id.userName);
+        tv.setText(record.getStudentName());
+        setupDrawerContent(nvDrawer);
+
+    }
+
+    private void alertMsg(String title, String msg) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(msg);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+                });
+    }
+
+    public void selectDrawerItem(MenuItem menuItem) {
+        // Create a new fragment and specify the fragment to show based on nav item clicked
+//        Fragment fragment = null;
+//        Class fragmentClass;
+        Handler mHandler = new Handler();
+
+        switch(menuItem.getItemId()) {
+            case R.id.nav_current:
+                break;
+            case R.id.nav_whatif:
+                startWhatIf();
+                break;
+            //case R.id.nav_adviser:
+                //startAdviser();
+                //break;
+            case R.id.nav_signout:
+                toast();
+                break;
+        }
+
+        if (menuItem.getItemId() == R.id.nav_signout) {
+            mDrawer.closeDrawers();
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    log_off();
+                }
+            }, 1000);
+        } else {
+
+
+            // Set action bar title
+            setTitle(menuItem.getTitle());
+            // Close the navigation drawer
+            mDrawer.closeDrawers();
+        }
+
+
+    }
+>>>>>>> origin/master
 
     private void toast() {Toast.makeText(this, "Logging Off...", Toast.LENGTH_SHORT).show();}
 
