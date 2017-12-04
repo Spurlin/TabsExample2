@@ -155,6 +155,8 @@ public class StudentRecord extends AppCompatActivity implements AsyncResponse, S
             return null;
     }
 
+    public String getStudentName() {return studentName; }
+
     @Override
     public void processFinish(boolean res)
     {
