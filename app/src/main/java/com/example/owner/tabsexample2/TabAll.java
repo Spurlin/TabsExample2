@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -41,6 +42,8 @@ import java.io.Serializable;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class TabAll extends Fragment implements Serializable {
+=======
+>>>>>>> parent of 6276ea6... Change Student Name
 
     private StudentRecord record;
     private PopupWindow popupWindow;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,18 +8,34 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context="com.example.owner.tabsexample2.MainActivity$PlaceholderFragment">
+=======
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                tools:context="com.example.owner.tabsexample2.MainActivity$PlaceholderFragment">
+>>>>>>> parent of 6276ea6... Change Student Name
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
+<<<<<<< HEAD
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="0dp">
+=======
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp">
+>>>>>>> parent of 6276ea6... Change Student Name
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:orientation="vertical">
 
             // header card
@@ -1194,3 +1211,14 @@
     </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
+=======
+            android:orientation="vertical"
+            android:scrollbarAlwaysDrawVerticalTrack="true">
+
+            //Progress bar and course info goes here
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>
+>>>>>>> parent of 6276ea6... Change Student Name

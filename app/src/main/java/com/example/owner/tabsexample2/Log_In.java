@@ -30,9 +30,8 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
     private EditText pswd_Btn;
     private String defaultEmail = "Email";
     private int failedAttemptCount = 0;
-    private String[] fields2;
 
-    //private StudentRecord record;
+    private StudentRecord record;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +90,7 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
             String[] fields = result.split("~");
             System.out.println("Fields: " + fields.length);
             if(fields.length >= 5) { //Don't try this if we didn't get enough fields to set up the student.
-                fields2 = fields;
-                //record = new StudentRecord(fields[1], fields[2], fields[3], fields[4]);//Start building the student record.
+                record = new StudentRecord(fields[1], fields[2], fields[3], fields[4]);//Start building the student record.
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -115,6 +113,7 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
 
         Intent intent = new Intent(this, MainActivity.class);
 <<<<<<< HEAD
+<<<<<<< HEAD
         intent.putExtra("StudentRecord", record);
 =======
         intent.putExtra("stu_id",fields2[1]);
@@ -122,6 +121,8 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
         intent.putExtra("fname",fields2[3]);
         intent.putExtra("lname",fields2[4]);
 >>>>>>> origin/master
+=======
+>>>>>>> parent of 6276ea6... Change Student Name
         startActivity(intent);
     }
 

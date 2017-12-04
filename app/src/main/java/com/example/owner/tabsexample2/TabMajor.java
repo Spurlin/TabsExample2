@@ -8,9 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+=======
+>>>>>>> parent of 6276ea6... Change Student Name
 
 import java.io.Serializable;
 =======
@@ -34,6 +37,7 @@ public class TabMajor extends Fragment implements Serializable {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         View rootView = inflater.inflate(R.layout.tab_major, container, false);
 
         Intent intent = getActivity().getIntent();
@@ -51,6 +55,9 @@ public class TabMajor extends Fragment implements Serializable {
         TextView title = (TextView)rootView.findViewById(R.id.pageName);
         title.setText("Courses for Major");
 >>>>>>> origin/master
+=======
+        View rootView = inflater.inflate(R.layout.tab_major, container, false);
+>>>>>>> parent of 6276ea6... Change Student Name
         return rootView;
     }
 }

@@ -2,7 +2,6 @@ package com.example.owner.tabsexample2;
 
 import android.support.v7.app.AppCompatActivity;
 
-import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -13,7 +12,7 @@ import java.util.concurrent.ExecutionException;
 
 public class StudentRecord extends AppCompatActivity implements AsyncResponse, Serializable
 {
-    private String studentName;
+    private final String studentName;
     private ArrayList<Course> allCourses;
     private DegreePlan major;
     private DegreePlan whatIf = null;
@@ -73,8 +72,6 @@ public class StudentRecord extends AppCompatActivity implements AsyncResponse, S
         //getCourse(0).retrieveClassesFromServer();//First class will be a taken one; should do nothing.
         //getCourse(allCourses.size() - 2).retrieveClassesFromServer();//Last class will be a non-taken one; should load classes.
     }
-
-    public String getStudentName() { return studentName; }
 
     public void addCourse(Course newCourse)
     {

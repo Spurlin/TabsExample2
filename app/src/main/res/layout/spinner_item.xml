@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+<<<<<<< HEAD
 <<<<<<< HEAD
     android:textSize="30sp"
 =======
     android:ellipsize="end"
 >>>>>>> origin/master
+=======
+    android:textSize="18sp"
+>>>>>>> parent of 6276ea6... Change Student Name
     android:gravity="left"
     android:layout_gravity="center_vertical"
     android:lines="1"
+<<<<<<< HEAD
 <<<<<<< HEAD
     android:ellipsize="end"
     android:textColor="@android:color/black"
@@ -20,3 +26,8 @@
     android:textColor="@android:color/white"
     android:textSize="18sp" />
 >>>>>>> origin/master
+=======
+    android:ellipsize="end"
+    android:textColor="@android:color/white"
+    android:padding="5dp"/>
+>>>>>>> parent of 6276ea6... Change Student Name
