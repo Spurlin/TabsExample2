@@ -15,6 +15,7 @@ import android.widget.Toast;
 import android.app.AlertDialog;
 
 import java.io.Serializable;
+import java.net.UnknownHostException;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -66,10 +67,16 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
     }
 
     private boolean isConnected() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        ConnectivityManager connec = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connec != null && (
+                (connec.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) ||
+                        (connec.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED))) {
+
+           return true;
+
+        }
+        return false;
     }
 
     private void alertMsg(String title, String msg) {
@@ -86,12 +93,11 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
     }
 
     private void checkCredentials(String userName, String password) {
-
+        try {
         String type = "login";
         DBConnector dbConnector = new DBConnector(this);
         dbConnector.delegate = this;
         dbConnector.execute(type, userName, password);
-        try {
             String result = dbConnector.get();
             System.out.println(result);
             String[] fields = result.split("~");
@@ -105,7 +111,7 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
             e.printStackTrace();
         }
 
-        //String result = dbConnector.getResults();
+            //String result = dbConnector.getResults();
 
         //System.out.println("<-RESULTS->");
         //System.out.print(result);
