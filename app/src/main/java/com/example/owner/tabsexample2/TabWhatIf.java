@@ -43,7 +43,7 @@ public class TabWhatIf  extends Fragment {
     private DrawerLayout mainLayout;
     private int i;
     private int credsEarned;
-    private int creditsLeft;
+    private int credsNeeded;
     private String mMajorName;
 
     @Override
@@ -55,8 +55,20 @@ public class TabWhatIf  extends Fragment {
 
         final StudentRecord record = (StudentRecord) intent.getSerializableExtra("StudentRecord");
         degreeNames = record.getDegreeNames();
-        sMajor = degreeNames[0];
-        whatIfDegreePlan = record.setWhatIf(sMajor);
+        if(record.getWhatIf() == null)
+        {
+            sMajor = degreeNames[0];//If we have no what-if loaded, start with "choose one" option.
+            whatIfDegreePlan = null;
+            credsEarned = 0;
+            credsNeeded = 0;
+        }
+        else
+        {
+            sMajor = record.getWhatIf().getName();//Otherwise, get the major name.
+            whatIfDegreePlan = record.getWhatIf();//record.setWhatIf(sMajor);
+            credsEarned = (int) whatIfDegreePlan.getCreditsEarned();
+            credsNeeded = (int) whatIfDegreePlan.getCreditsNeeded();
+        }
 
         spMajor = (Spinner) rootView.findViewById(R.id.whatIf_Spinner);
 
@@ -76,8 +88,12 @@ public class TabWhatIf  extends Fragment {
                     // Showing selected spinner item
 //                    Toast.makeText(getActivity().getApplicationContext(),
 //                            "Selected Major : " + sMajor, Toast.LENGTH_SHORT).show();
-
-                    whatIfDegreePlan = record.setWhatIf(sMajor);
+                    if(!sMajor.equals(degreeNames[0]))//Don't load if "choose one" was selected.
+                    {
+                        whatIfDegreePlan = record.setWhatIf(sMajor);
+                        credsEarned = (int) whatIfDegreePlan.getCreditsEarned();
+                        credsNeeded = (int) whatIfDegreePlan.getCreditsNeeded();
+                    }
 
             }
             @Override
@@ -86,14 +102,14 @@ public class TabWhatIf  extends Fragment {
             }
         });
 
-        credsEarned = (int) whatIfDegreePlan.getCreditsEarned();
-        creditsLeft = (int) whatIfDegreePlan.getCreditsNeeded();
-
         TextView ratio = (TextView) rootView.findViewById(R.id.ratio);
-        ratio.setText(credsEarned + "/" + 120 + " Credits");
+        ratio.setText(credsEarned + "/" + credsNeeded + " Credits");
         ProgressBar mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
-        mProgressBar.setMax(120);
+        mProgressBar.setMax(credsNeeded);
         mProgressBar.setProgress(credsEarned);
+
+        if(whatIfDegreePlan == null)
+            return rootView;
 
         LinearLayout mLinearLayout = (LinearLayout) rootView.findViewById(R.id.whatIf_main_LinLayout);
 

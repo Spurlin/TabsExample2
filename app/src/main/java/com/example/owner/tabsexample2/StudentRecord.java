@@ -63,9 +63,12 @@ public class StudentRecord extends AppCompatActivity implements AsyncResponse, S
             result = dbConnector.get();
             String[] fields = result.split("~");
             System.out.println("Fields: " + fields.length);
-            degreeNames = new String[fields.length - 1];
+            degreeNames = fields;
+            degreeNames[0] = "Choose one...";//Replace "connectsuccess" with a blank option.
+
+            /*degreeNames = new String[fields.length - 1];
             for(int i = 1; i < fields.length; i++)
-                degreeNames[i - 1] = fields[i];//We need to discard the first one, as it's just going to be "connectsuccess."
+                degreeNames[i - 1] = fields[i];//We need to discard the first one, as it's just going to be "connectsuccess."*/
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
