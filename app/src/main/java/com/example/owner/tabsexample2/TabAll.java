@@ -55,6 +55,13 @@ public class TabAll extends Fragment implements Serializable {
         View rootView = inflater.inflate(R.layout.tab_all, container, false);
         super.onCreate(savedInstanceState);
 
+        setView(rootView, container);
+
+        return rootView;
+    }
+
+    public void setView(View rootView, ViewGroup container) {
+
         Intent intent = getActivity().getIntent();
 
         final StudentRecord record = (StudentRecord) intent.getSerializableExtra("StudentRecord");
@@ -62,8 +69,8 @@ public class TabAll extends Fragment implements Serializable {
         LinearLayout mLinearLayout = (LinearLayout) rootView.findViewById(R.id.all_main_LinLayout);
 
         LinearLayout.LayoutParams paramsWrap = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT ) ;
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT ) ;
 
         LinearLayout.LayoutParams paramsWrapCARD = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -95,59 +102,59 @@ public class TabAll extends Fragment implements Serializable {
                 TableRow.LayoutParams.MATCH_PARENT,
                 2 , 1f);
 
-            CardView newCard = new CardView(container.getContext());
-            newCard.setLayoutParams(paramsWrapCARD);
+        CardView newCard = new CardView(container.getContext());
+        newCard.setLayoutParams(paramsWrapCARD);
 
-            newCard.setRadius(50);
-            newCard.setContentPadding(10, 10 , 10 , 10 );
-            newCard.setMaxCardElevation(20);
-            newCard.setElevation(15);
+        newCard.setRadius(50);
+        newCard.setContentPadding(10, 10 , 10 , 10 );
+        newCard.setMaxCardElevation(20);
+        newCard.setElevation(15);
 
-            RelativeLayout relativeLayout = new RelativeLayout(container.getContext());
-            relativeLayout.setLayoutParams(paramsWrap);
+        RelativeLayout relativeLayout = new RelativeLayout(container.getContext());
+        relativeLayout.setLayoutParams(paramsWrap);
 
-            LinearLayout insideLinLayout = new LinearLayout((container.getContext()));
-            insideLinLayout.setLayoutParams(paramsMatchWrap);
-            insideLinLayout.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout insideLinLayout = new LinearLayout((container.getContext()));
+        insideLinLayout.setLayoutParams(paramsMatchWrap);
+        insideLinLayout.setOrientation(LinearLayout.VERTICAL);
 
-            TableLayout courseTable = new TableLayout(container.getContext());
-            courseTable.setLayoutParams(paramsMatchTable);
-            courseTable.setStretchAllColumns(true);
+        TableLayout courseTable = new TableLayout(container.getContext());
+        courseTable.setLayoutParams(paramsMatchTable);
+        courseTable.setStretchAllColumns(true);
 
-            TableRow headerRow = new TableRow(container.getContext());
-            headerRow.setLayoutParams(paramsMatchTableRow);
-            headerRow.setPadding(0, 0, 0, 0);
+        TableRow headerRow = new TableRow(container.getContext());
+        headerRow.setLayoutParams(paramsMatchTableRow);
+        headerRow.setPadding(0, 0, 0, 0);
 //            headerRow.setGravity(Gravity.CENTER);
 
-            TextView courseTV = new TextView(container.getContext());
-            courseTV.setLayoutParams(paramsMatchTableRow);
-            courseTV.setText("Course");
-            courseTV.setTypeface(null, Typeface.BOLD);
-            courseTV.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            courseTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            courseTV.setGravity(Gravity.CENTER_HORIZONTAL);
+        TextView courseTV = new TextView(container.getContext());
+        courseTV.setLayoutParams(paramsMatchTableRow);
+        courseTV.setText("Course");
+        courseTV.setTypeface(null, Typeface.BOLD);
+        courseTV.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        courseTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        courseTV.setGravity(Gravity.CENTER_HORIZONTAL);
 
-            TextView descTV = new TextView(container.getContext());
-            descTV.setLayoutParams(paramsMatchTableRow);
-            descTV.setText("Description");
-            descTV.setTypeface(null, Typeface.BOLD);
-            descTV.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            descTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            descTV.setGravity(Gravity.CENTER_HORIZONTAL);
+        TextView descTV = new TextView(container.getContext());
+        descTV.setLayoutParams(paramsMatchTableRow);
+        descTV.setText("Description");
+        descTV.setTypeface(null, Typeface.BOLD);
+        descTV.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        descTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        descTV.setGravity(Gravity.CENTER_HORIZONTAL);
 
-            TextView gradeTV = new TextView(container.getContext());
-            gradeTV.setLayoutParams(paramsMatchTableRow);
-            gradeTV.setText("Grade");
-            gradeTV.setTypeface(null, Typeface.BOLD);
-            gradeTV.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            gradeTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            descTV.setGravity(Gravity.CENTER_HORIZONTAL);
+        TextView gradeTV = new TextView(container.getContext());
+        gradeTV.setLayoutParams(paramsMatchTableRow);
+        gradeTV.setText("Grade");
+        gradeTV.setTypeface(null, Typeface.BOLD);
+        gradeTV.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        gradeTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        descTV.setGravity(Gravity.CENTER_HORIZONTAL);
 
-            headerRow.addView(courseTV);
-            headerRow.addView(descTV);
-            headerRow.addView(gradeTV);
-            courseTable.addView(headerRow);
-            int addedIndicator = 1;
+        headerRow.addView(courseTV);
+        headerRow.addView(descTV);
+        headerRow.addView(gradeTV);
+        courseTable.addView(headerRow);
+        int addedIndicator = 1;
 
         for (i = 0; i < record.getNumberOfCourses(); i++) {
 
@@ -206,6 +213,14 @@ public class TabAll extends Fragment implements Serializable {
                         TextView courseUnits = popupView.findViewById(R.id.courseUnits);
                         TextView courseWhen = popupView.findViewById(R.id.courseWhen);
                         TextView courseDesc = popupView.findViewById(R.id.courseDesc);
+                        Button sessionBtn = popupView.findViewById(R.id.sessionButton);
+
+                        sessionBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                System.out.println("<SESSIONS BUTTON CLICKED>");
+                            }
+                        });
 
                         courseCode.setText(record.getCourseCode(index));
                         courseName.setText(record.getCourseName(index));
@@ -260,7 +275,6 @@ public class TabAll extends Fragment implements Serializable {
         mProgressBar.setMax(120);
         mProgressBar.setProgress(credsEarned);
 
-        return rootView;
     }
 
 }

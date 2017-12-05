@@ -32,6 +32,7 @@ public class DegreeRequirement extends AppCompatActivity implements AsyncRespons
         dbConnector.delegate = this;
         dbConnector.execute(type, rqCode);
         String result = null;
+
         try {
             result = dbConnector.get();
 

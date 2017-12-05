@@ -186,6 +186,4 @@ public class StudentRecord extends AppCompatActivity implements AsyncResponse, S
     public float getCreditsNeeded() { return major.getCreditsNeeded(); }
 
     public String getMajorName() { return mDegreeName; }
-
-    public DegreePlan getWhatIfDegreePlan() { return whatIf; }
 }
