@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -44,6 +45,7 @@ public class TabAll extends Fragment implements Serializable {
     private StudentRecord record;
     private PopupWindow popupWindow;
     private DrawerLayout mainLayout;
+    private int credsEarned = 0;
     private int i;
 
     @Override
@@ -148,101 +150,112 @@ public class TabAll extends Fragment implements Serializable {
 
         for (i = 0; i < record.getNumberOfCourses(); i++) {
 
-            TableRow newRow = new TableRow(container.getContext());
-            newRow.setLayoutParams(paramsMatchTableRow);
-            newRow.setPadding(0, 50, 0, 50);
-            newRow.setGravity(Gravity.CENTER);
+            if (record.getCourseStatus(i) != "NotTaken") {
+                credsEarned += record.getCourseUnits(i);
+                TableRow newRow = new TableRow(container.getContext());
+                newRow.setLayoutParams(paramsMatchTableRow);
+                newRow.setPadding(0, 50, 0, 50);
+                newRow.setGravity(Gravity.CENTER);
 
-            View divider = new View(container.getContext());
-            divider.setLayoutParams(paramsLine);
-            divider.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-            divider.setElevation(5);
+                View divider = new View(container.getContext());
+                divider.setLayoutParams(paramsLine);
+                divider.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                divider.setElevation(5);
 
-            paramsWrapTableRow.weight=1;
+                paramsWrapTableRow.weight = 1;
 
-            TextView newCourseTV = new TextView(container.getContext());
-            newCourseTV.setLayoutParams(paramsWrapTableRow);
-            newCourseTV.setText(record.getCourseCode(i));
-            newCourseTV.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            newCourseTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            newCourseTV.setEllipsize(TextUtils.TruncateAt.END);
-            newCourseTV.setGravity(Gravity.CENTER);
+                TextView newCourseTV = new TextView(container.getContext());
+                newCourseTV.setLayoutParams(paramsWrapTableRow);
+                newCourseTV.setText(record.getCourseCode(i));
+                newCourseTV.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                newCourseTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                newCourseTV.setEllipsize(TextUtils.TruncateAt.END);
+                newCourseTV.setGravity(Gravity.CENTER);
 
-            TextView newDescTV = new TextView(container.getContext());
-            newDescTV.setLayoutParams(paramsWrapTableRow);
-            newDescTV.setText(record.getCourseName(i));
-            newDescTV.setTextColor(getResources().getColor(R.color.linkColor));
-            newDescTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            newDescTV.setGravity(Gravity.CENTER);
-            newDescTV.setTag(i);
-            newDescTV.setClickable(true);
-            newDescTV.setOnClickListener( new View.OnClickListener() {
+                TextView newDescTV = new TextView(container.getContext());
+                newDescTV.setLayoutParams(paramsWrapTableRow);
+                newDescTV.setText(record.getCourseName(i));
+                newDescTV.setTextColor(getResources().getColor(R.color.linkColor));
+                newDescTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                newDescTV.setGravity(Gravity.CENTER);
+                newDescTV.setTag(i);
+                newDescTV.setClickable(true);
+                newDescTV.setOnClickListener(new View.OnClickListener() {
 
-                //this is where the popup is
-                @Override
-                public void onClick(View v) {
+                    //this is where the popup is
+                    @Override
+                    public void onClick(View v) {
 //        startActivity(new Intent(MainActivity.this,Pop.class));
 
-                    LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
-                    mainLayout = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
-                    View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.popupwindow, null);
+                        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
+                        mainLayout = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
+                        View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.popupwindow, null);
 
-                    int index = (int) v.getTag();
-                    int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                    int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                    boolean focusable = true;
-                    popupWindow = new PopupWindow(popupView, width, height, focusable);
+                        int index = (int) v.getTag();
+                        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                        boolean focusable = true;
+                        popupWindow = new PopupWindow(popupView, width, height, focusable);
 
-                    TextView courseCode = popupView.findViewById(R.id.courseCode);
-                    TextView courseName = popupView.findViewById(R.id.courseName);
-                    TextView courseUnits = popupView.findViewById(R.id.courseUnits);
-                    TextView courseWhen = popupView.findViewById(R.id.courseWhen);
-                    TextView courseDesc = popupView.findViewById(R.id.courseDesc);
+                        TextView courseCode = popupView.findViewById(R.id.courseCode);
+                        TextView courseName = popupView.findViewById(R.id.courseName);
+                        TextView courseUnits = popupView.findViewById(R.id.courseUnits);
+                        TextView courseWhen = popupView.findViewById(R.id.courseWhen);
+                        TextView courseDesc = popupView.findViewById(R.id.courseDesc);
 
-                    courseCode.setText(record.getCourseCode(index));
-                    courseName.setText(record.getCourseName(index));
-                    courseUnits.setText(String.valueOf(record.getCourseUnits(index)));
-                    courseWhen.setText(record.getCourseWhen(index));
-                    courseDesc.setText(record.getCourseDesc(index));
+                        courseCode.setText(record.getCourseCode(index));
+                        courseName.setText(record.getCourseName(index));
+                        courseUnits.setText(String.valueOf(record.getCourseUnits(index)));
+                        courseWhen.setText(record.getCourseWhen(index));
+                        courseDesc.setText(record.getCourseDesc(index));
 
-                    // show in the center of the screen
-                    popupWindow.showAtLocation(mainLayout, Gravity.CENTER, 0, 0);
+                        // show in the center of the screen
+                        popupWindow.showAtLocation(mainLayout, Gravity.CENTER, 0, 0);
 
-                    // greys the layout that the pop up window is on top of
-                    mainLayout.getForeground().setAlpha(220);
+                        // greys the layout that the pop up window is on top of
+                        mainLayout.getForeground().setAlpha(220);
 
-                    // handles when the pop up window is closed via touch outside of window or
-                    // via back button
-                    popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                        @Override
-                        public void onDismiss() {
-                            mainLayout.getForeground().setAlpha(0);
-                            popupWindow.dismiss();
-                        }
-                    });
+                        // handles when the pop up window is closed via touch outside of window or
+                        // via back button
+                        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                            @Override
+                            public void onDismiss() {
+                                mainLayout.getForeground().setAlpha(0);
+                                popupWindow.dismiss();
+                            }
+                        });
 
+                    }
+                });
+
+                TextView newGradeTV = new TextView(container.getContext());
+                newGradeTV.setLayoutParams(paramsWrapTableRow);
+                newGradeTV.setText(record.getCourseStatus(i));
+                newGradeTV.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                newGradeTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                newGradeTV.setGravity(Gravity.CENTER);
+
+                newRow.addView(newCourseTV);
+                newRow.addView(newDescTV);
+                newRow.addView(newGradeTV);
+                courseTable.addView(newRow);
+
+                if (i != record.getNumberOfCourses() - 1) {
+                    courseTable.addView(divider);
                 }
-            });
-
-            TextView newGradeTV = new TextView(container.getContext());
-            newGradeTV.setLayoutParams(paramsWrapTableRow);
-            newGradeTV.setText(record.getCourseStatus(i));
-            newGradeTV.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            newGradeTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14 );
-            newGradeTV.setGravity(Gravity.CENTER);
-
-            newRow.addView(newCourseTV);
-            newRow.addView(newDescTV);
-            newRow.addView(newGradeTV);
-            courseTable.addView(newRow);
-
-            if (i != record.getNumberOfCourses() - 1) { courseTable.addView(divider); }
+            }
         }
 
         insideLinLayout.addView(courseTable);
         relativeLayout.addView(insideLinLayout);
         newCard.addView(relativeLayout);
         mLinearLayout.addView(newCard);
+
+        TextView ratio = (TextView) rootView.findViewById(R.id.ratio);
+        ratio.setText(credsEarned + "/" + 120 + " Credits");
+        ProgressBar mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+        mProgressBar.setMax(120);
+        mProgressBar.setProgress(credsEarned);
 
         return rootView;
     }
