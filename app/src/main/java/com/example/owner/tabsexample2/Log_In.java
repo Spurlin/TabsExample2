@@ -1,6 +1,10 @@
 package com.example.owner.tabsexample2;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,6 +15,7 @@ import android.widget.Toast;
 import android.app.AlertDialog;
 
 import java.io.Serializable;
+import java.net.UnknownHostException;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -46,20 +51,53 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
                 // get the entered values for username and password
                 userName = usrName_Btn.getText().toString();
                 pswd = pswd_Btn.getText().toString();
-                checkCredentials(userName,pswd);
+                if (isConnected()) {
+                    // get the entered values for username and password
+                    userName = usrName_Btn.getText().toString();
+                    pswd = pswd_Btn.getText().toString();
+                    checkCredentials(userName,pswd);
+                }
+                else {
+                    alertMsg("Error","You need to be connected to the internet to log in.");
+                }
 
         }});
 
 
     }
 
-    private void checkCredentials(String userName, String password) {
+    private boolean isConnected() {
+        ConnectivityManager connec = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 
+        if (connec != null && (
+                (connec.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) ||
+                        (connec.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED))) {
+
+           return true;
+
+        }
+        return false;
+    }
+
+    private void alertMsg(String title, String msg) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(msg);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    private void checkCredentials(String userName, String password) {
+        try {
         String type = "login";
         DBConnector dbConnector = new DBConnector(this);
         dbConnector.delegate = this;
         dbConnector.execute(type, userName, password);
-        try {
             String result = dbConnector.get();
             System.out.println(result);
             String[] fields = result.split("~");
@@ -73,7 +111,7 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
             e.printStackTrace();
         }
 
-        //String result = dbConnector.getResults();
+            //String result = dbConnector.getResults();
 
         //System.out.println("<-RESULTS->");
         //System.out.print(result);
