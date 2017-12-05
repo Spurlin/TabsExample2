@@ -202,7 +202,7 @@ public class TabAll extends Fragment implements Serializable {
                         mainLayout = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
                         View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.popupwindow, null);
 
-                        int index = (int) v.getTag();
+                        final int index = (int) v.getTag();
                         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
                         boolean focusable = true;
@@ -213,12 +213,31 @@ public class TabAll extends Fragment implements Serializable {
                         TextView courseUnits = popupView.findViewById(R.id.courseUnits);
                         TextView courseWhen = popupView.findViewById(R.id.courseWhen);
                         TextView courseDesc = popupView.findViewById(R.id.courseDesc);
-                        Button sessionBtn = popupView.findViewById(R.id.sessionButton);
+                        final Button sessionBtn = popupView.findViewById(R.id.sessionButton);
+                        final TextView sessionTV = popupView.findViewById(R.id.sessionTV);
 
                         sessionBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 System.out.println("<SESSIONS BUTTON CLICKED>");
+
+                                if (sessionTV.getVisibility() == View.GONE) {
+
+                                    sessionTV.setVisibility(View.VISIBLE);
+                                    sessionTV.setText("<COURSE SESSIONS HERE>");
+
+                                    sessionBtn.setText("Close Sessions");
+
+                                } else {
+
+                                    sessionTV.setVisibility(View.GONE);
+                                    sessionTV.setText("<COURSE SESSIONS HERE>");
+                                    sessionBtn.setText("Sessions");
+                                }
+
+                                if (record.getCourse(index).gotSessions()) {
+
+                                } else { }
                             }
                         });
 

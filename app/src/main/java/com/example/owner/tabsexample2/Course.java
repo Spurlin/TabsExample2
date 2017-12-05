@@ -157,13 +157,15 @@ public class Course extends AppCompatActivity implements AsyncResponse, Serializ
         return sessionsRetrieved;
     }
 
-    public ClassSession getClass(int i)
+    public ClassSession getSession(int i)
     {
         if(i >= 0 && i < sessions.size())
             return sessions.get(i);
         else
             return null;
     }
+
+    public int getNumberOfSessions() { return sessions.size(); }
 
     public ClassSession getClass(String smstr, String sId)
     {
