@@ -156,6 +156,8 @@ public class TabAll extends Fragment implements Serializable {
         courseTable.addView(headerRow);
         int addedIndicator = 1;
 
+        credsEarned = 0;
+
         for (i = 0; i < record.getNumberOfCourses(); i++) {
 
             if (record.getCourseStatus(i) != "NotTaken") {
