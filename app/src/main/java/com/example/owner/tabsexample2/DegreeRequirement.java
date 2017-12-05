@@ -34,28 +34,30 @@ public class DegreeRequirement extends AppCompatActivity implements AsyncRespons
         String result = null;
         try {
             result = dbConnector.get();
-            String[] fields = result.split("~");
-            System.out.println("Fields: " + fields.length);
-            subRequirements = new ArrayList();
-            for(int i = 1; i < fields.length - 5; i += 6)//Create each sub-requirement object.
-            {
-                if(getSubRequirement(fields[i]) == null)//If we don't have this sub-req yet, create a new one.
-                    subRequirements.add(new DegreeSubRequirement(fields[i], fields[i + 1],
-                            fields[i + 2], fields[i + 3], fields[i + 4], fields[i + 5], allCourses));//We pull all course info just in case we need it; otherwise, we'd overwhelm the database.
-                else//If we already have this sub-req built, just add a new course to it.
-                    getSubRequirement(fields[i]).addCourse(fields[i + 1], fields[i + 2],
-                            fields[i + 3], fields[i + 4], fields[i + 5], allCourses);
-            }
+
+                String[] fields = result.split("~");
+                System.out.println("Fields: " + fields.length);
+                subRequirements = new ArrayList();
+                for (int i = 1; i < fields.length - 5; i += 6)//Create each sub-requirement object.
+                {
+                    if (getSubRequirement(fields[i]) == null)//If we don't have this sub-req yet, create a new one.
+                        subRequirements.add(new DegreeSubRequirement(fields[i], fields[i + 1],
+                                fields[i + 2], fields[i + 3], fields[i + 4], fields[i + 5], allCourses));//We pull all course info just in case we need it; otherwise, we'd overwhelm the database.
+                    else//If we already have this sub-req built, just add a new course to it.
+                        getSubRequirement(fields[i]).addCourse(fields[i + 1], fields[i + 2],
+                                fields[i + 3], fields[i + 4], fields[i + 5], allCourses);
+                }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
-        for (DegreeSubRequirement sr : subRequirements)
-            sr.calculateCreditsEarned();//Now that all the sub-requirements are built, calculate the credits earned in each.
+            for (DegreeSubRequirement sr : subRequirements)
+                sr.calculateCreditsEarned();//Now that all the sub-requirements are built, calculate the credits earned in each.
 
-        calculateCreditsNeeded();
+            calculateCreditsNeeded();
+
     }
 
     private float calculateCreditsNeeded()
@@ -114,6 +116,8 @@ public class DegreeRequirement extends AppCompatActivity implements AsyncRespons
         else
             return null;
     }
+
+    public int getNumberOfSubReq() { return subRequirements.size(); }
 
     public float getCreditsNeeded()
     {

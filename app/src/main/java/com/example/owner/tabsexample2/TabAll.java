@@ -147,20 +147,24 @@ public class TabAll extends Fragment implements Serializable {
             headerRow.addView(descTV);
             headerRow.addView(gradeTV);
             courseTable.addView(headerRow);
+            int addedIndicator = 1;
 
         for (i = 0; i < record.getNumberOfCourses(); i++) {
 
             if (record.getCourseStatus(i) != "NotTaken") {
-                credsEarned += record.getCourseUnits(i);
-                TableRow newRow = new TableRow(container.getContext());
-                newRow.setLayoutParams(paramsMatchTableRow);
-                newRow.setPadding(0, 50, 0, 50);
-                newRow.setGravity(Gravity.CENTER);
 
                 View divider = new View(container.getContext());
                 divider.setLayoutParams(paramsLine);
                 divider.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 divider.setElevation(5);
+
+                if (addedIndicator >= 3) { courseTable.addView(divider); }
+
+                credsEarned += record.getCourseUnits(i);
+                TableRow newRow = new TableRow(container.getContext());
+                newRow.setLayoutParams(paramsMatchTableRow);
+                newRow.setPadding(0, 50, 0, 50);
+                newRow.setGravity(Gravity.CENTER);
 
                 paramsWrapTableRow.weight = 1;
 
@@ -240,9 +244,8 @@ public class TabAll extends Fragment implements Serializable {
                 newRow.addView(newGradeTV);
                 courseTable.addView(newRow);
 
-                if (i != record.getNumberOfCourses() - 1) {
-                    courseTable.addView(divider);
-                }
+                if (addedIndicator == 1) { courseTable.addView(divider); }
+                addedIndicator++;
             }
         }
 

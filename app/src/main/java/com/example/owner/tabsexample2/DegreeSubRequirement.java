@@ -89,6 +89,8 @@ public class DegreeSubRequirement implements Serializable
             return null;
     }
 
+    public int getNumberOfCourses() { return courses.size(); }
+
     public float getCreditsNeeded()
     {
         return creditsNeeded;

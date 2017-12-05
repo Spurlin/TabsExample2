@@ -83,6 +83,8 @@ public class DegreePlan extends AppCompatActivity implements AsyncResponse, Seri
             return null;
     }
 
+    public int getNumberOfRequirement() { return requirements.size(); }
+
     public float getCreditsNeeded()
     {
         return creditsNeeded;
