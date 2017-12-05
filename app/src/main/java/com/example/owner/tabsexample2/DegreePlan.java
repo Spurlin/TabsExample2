@@ -41,7 +41,18 @@ public class DegreePlan extends AppCompatActivity implements AsyncResponse, Seri
             e.printStackTrace();
         }
 
+        calculateCreditsNeeded();
         calculateCreditsEarned();
+    }
+
+    private float calculateCreditsNeeded()
+    {
+        creditsNeeded = 0;
+        for (DegreeRequirement r : requirements)
+        {
+            creditsNeeded += r.getCreditsNeeded();
+        }
+        return creditsNeeded;
     }
 
     private float calculateCreditsEarned()
@@ -49,7 +60,7 @@ public class DegreePlan extends AppCompatActivity implements AsyncResponse, Seri
         creditsEarned = 0;
         for (DegreeRequirement r : requirements)
         {
-            creditsEarned += r.calculateCreditsEarned();
+            creditsEarned += r.getCreditsEarned();
         }
         return creditsEarned;
     }

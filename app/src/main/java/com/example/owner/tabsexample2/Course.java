@@ -15,7 +15,8 @@ public class Course extends AppCompatActivity implements AsyncResponse, Serializ
     private final CourseStatus status;
     private final String when;
     private final String description;
-    private ArrayList<ClassSession> classes = null;
+    private ArrayList<ClassSession> sessions = null;
+    private boolean sessionsRetrieved = false;
 
     public Course(String code, String smstr, String grade, String sId, String nm, String desc, String un, String rm, String schdl, String fname, String lname)
     {
@@ -62,8 +63,9 @@ public class Course extends AppCompatActivity implements AsyncResponse, Serializ
         units = Float.parseFloat(un);
         System.out.println("Description: " + desc);
         description = desc;
-        classes = new ArrayList<>();
-        classes.add(new ClassSession((fname + " " + lname), smstr, rm, schdl, sId));//Only class added is the one the student took.
+        sessions = new ArrayList<>();
+        sessions.add(new ClassSession((fname + " " + lname), smstr, rm, schdl, sId));//Only class added is the one the student took.
+        sessionsRetrieved = true;
         System.out.println("Done creating new entry for " + courseCode + " " + name);
     }
 
@@ -84,11 +86,16 @@ public class Course extends AppCompatActivity implements AsyncResponse, Serializ
         System.out.println("Done creating new entry for " + courseCode + " " + name);
     }
 
-    public void retrieveClassesFromServer()
+    public void retrieveSessionsFromServer()
     {
         if(isTaken())
         {
-            System.out.println(courseCode + " has been taken; classes have not been retrieved");
+            System.out.println(courseCode + " has been taken; sessions have not been retrieved");
+            return;
+        }
+        else if(sessionsRetrieved)
+        {
+            System.out.println(courseCode + " has already had its class sessions retrieved");
             return;
         }
 
@@ -102,15 +109,16 @@ public class Course extends AppCompatActivity implements AsyncResponse, Serializ
             result = dbConnector.get();
             String[] fields = result.split("~");
             System.out.println("Fields: " + fields.length);
-            classes = new ArrayList<>();
+            sessions = new ArrayList<>();
             for(int i = 1; i < fields.length - 5; i += 6)//Create each class session object.
-                classes.add(new ClassSession((fields[i] + " " + fields[i+1]), fields[i+2], fields[i+3],
+                sessions.add(new ClassSession((fields[i] + " " + fields[i+1]), fields[i+2], fields[i+3],
                         fields[i+4], fields[i+5]));//Constructor takes arguments in same order they were sent over from database.
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        sessionsRetrieved = true;
         System.out.println("Done retrieving classes for " + courseCode);
     }
 
@@ -144,10 +152,15 @@ public class Course extends AppCompatActivity implements AsyncResponse, Serializ
         return description;
     }
 
+    public boolean gotSessions()
+    {
+        return sessionsRetrieved;
+    }
+
     public ClassSession getClass(int i)
     {
-        if(i >= 0 && i < classes.size())
-            return classes.get(i);
+        if(i >= 0 && i < sessions.size())
+            return sessions.get(i);
         else
             return null;
     }
@@ -156,14 +169,14 @@ public class Course extends AppCompatActivity implements AsyncResponse, Serializ
     {
         int match = -1;
 
-        for(int i = 0; i < classes.size(); i++)
+        for(int i = 0; i < sessions.size(); i++)
         {
-            if(classes.get(i).getSemester().matches(smstr) && classes.get(i).getSession().equals(sId))//Look for a class with the matching semester and session ID.
+            if(sessions.get(i).getSemester().matches(smstr) && sessions.get(i).getSession().equals(sId))//Look for a class with the matching semester and session ID.
                 match = i;
         }
 
         if(match >= 0)
-            return classes.get(match);
+            return sessions.get(match);
         else
             return null;
     }

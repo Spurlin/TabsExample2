@@ -57,21 +57,23 @@ public class DegreeRequirement extends AppCompatActivity implements AsyncRespons
                 sr.calculateCreditsEarned();//Now that all the sub-requirements are built, calculate the credits earned in each.
 
             calculateCreditsNeeded();
+            calculateCreditsEarned();
 
     }
 
     private float calculateCreditsNeeded()
     {
-        creditsNeeded = 0;
+        creditsNeeded = 3 * subRequirements.size();
+        /*creditsNeeded = 0;
         for (DegreeSubRequirement s : subRequirements)
         {
             creditsNeeded = s.getCreditsNeeded();
-        }
+        }*/
 
         return creditsNeeded;
     }
     
-    public float calculateCreditsEarned()
+    private float calculateCreditsEarned()
     {
         creditsEarned = 0;
         for (DegreeSubRequirement s : subRequirements)

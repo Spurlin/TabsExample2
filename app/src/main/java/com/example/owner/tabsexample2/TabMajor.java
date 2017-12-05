@@ -35,7 +35,7 @@ public class TabMajor extends Fragment implements Serializable {
     private DrawerLayout mainLayout;
     private int i;
     private int credsEarned;
-    private int creditsLeft;
+    private int credsNeeded;
     private String mMajorName;
 
     @Override
@@ -53,12 +53,12 @@ public class TabMajor extends Fragment implements Serializable {
         majorTV.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         credsEarned = (int) record.getCreditsEarned();
-        creditsLeft = (int) record.getCreditsNeeded();
+        credsNeeded = (int) record.getCreditsNeeded();
         
         TextView ratio = (TextView) rootView.findViewById(R.id.ratio);
-        ratio.setText(credsEarned + "/" + 120 + " Credits");
+        ratio.setText(credsEarned + "/" + credsNeeded + " Credits");
         ProgressBar mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
-        mProgressBar.setMax(120);
+        mProgressBar.setMax(credsNeeded);
         mProgressBar.setProgress(credsEarned);
 
         LinearLayout mLinearLayout = (LinearLayout) rootView.findViewById(R.id.major_main_LinLayout);
