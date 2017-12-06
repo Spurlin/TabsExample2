@@ -217,6 +217,8 @@ public class TabAll extends Fragment implements Serializable {
                         TextView courseDesc = popupView.findViewById(R.id.courseDesc);
                         final Button sessionBtn = popupView.findViewById(R.id.sessionButton);
                         final TextView sessionTV = popupView.findViewById(R.id.sessionTV);
+                        final TextView sessionHeaderTV = popupView.findViewById(R.id.sessionHeaderTV);
+                        final String status = record.getCourseStatus(index);
 
                         sessionBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -225,21 +227,43 @@ public class TabAll extends Fragment implements Serializable {
 
                                 if (sessionTV.getVisibility() == View.GONE) {
 
+                                    if ( status.equalsIgnoreCase("NotTaken") ) {
+
+                                        sessionHeaderTV.setText("Offered: ");
+                                    } else if (status.equalsIgnoreCase("Enrolled") ) {
+
+                                        sessionHeaderTV.setText("Currently Enrolled in Session: ");
+                                    } else {
+                                        sessionHeaderTV.setText("Session taken: ");
+                                    }
+
+                                    sessionHeaderTV.setVisibility(View.VISIBLE);
                                     sessionTV.setVisibility(View.VISIBLE);
-                                    sessionTV.setText("<COURSE SESSIONS HERE>");
+
+                                   if ( record.getCourse(index).gotSessions()
+                                           &&  record.getCourse(index).getSession(index) != null
+                                           && record.getCourse(index).getSession(index).getInstructor() != null) {
+
+                                       sessionTV.setText(record.getCourse(index).getSession(index).getInstructor()
+                                               + "\n" + record.getCourse(index).getSession(index).getSchedule());
+
+                                   } else if ( record.getCourse(index).gotSessions()
+                                            &&  record.getCourse(index).getSession(index) != null ) {
+
+                                       sessionTV.setText(record.getCourse(index).getSession(index).getSchedule());
+                                   }
+                                   else {
+                                       sessionTV.setText("Not Available");
+                                   }
 
                                     sessionBtn.setText("Close Sessions");
 
                                 } else {
 
+                                    sessionHeaderTV.setVisibility(View.GONE);
                                     sessionTV.setVisibility(View.GONE);
-                                    sessionTV.setText("<COURSE SESSIONS HERE>");
                                     sessionBtn.setText("Sessions");
                                 }
-
-                                if (record.getCourse(index).gotSessions()) {
-
-                                } else { }
                             }
                         });
 

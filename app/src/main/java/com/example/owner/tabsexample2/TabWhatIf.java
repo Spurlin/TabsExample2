@@ -1,6 +1,7 @@
 package com.example.owner.tabsexample2;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -63,7 +65,6 @@ public class TabWhatIf  extends Fragment {
         spMajor = (Spinner) rootView.findViewById(R.id.whatIf_Spinner);
 
         adapterMajor = new ArrayAdapter<String>(this.getActivity(), R.layout.spinner_item, degreeNames);
-
         adapterMajor.setDropDownViewResource(R.layout.spinner_dropdown_items);
 
         spMajor.setAdapter(adapterMajor);
@@ -81,7 +82,7 @@ public class TabWhatIf  extends Fragment {
 
                     whatIfDegreePlan = record.setWhatIf(sMajor);
                 System.out.println("\n \n \n <WHAT IF DEGREE PLAN: " + sMajor + ">\n \n \n ");
-                if (!sMajor.equalsIgnoreCase(DEFAULT)) { setView(rootView, container); }
+                if (!sMajor.equalsIgnoreCase(DEFAULT) ) { setView(rootView, container); }
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -133,6 +134,14 @@ public class TabWhatIf  extends Fragment {
                 TableRow.LayoutParams.MATCH_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT, 1f ) ;
 
+        TableRow.LayoutParams paramsMatchTableHeader = new TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT, 1f ) ;
+
+        LinearLayout.LayoutParams paramsMatchReqHeader = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT ) ;
+
         TableRow.LayoutParams paramsWrapTableRow = new TableRow.LayoutParams(
                 0,
                 TableRow.LayoutParams.WRAP_CONTENT, 1f ) ;
@@ -140,6 +149,10 @@ public class TabWhatIf  extends Fragment {
         TableRow.LayoutParams paramsLine = new TableRow.LayoutParams(
                 TableRow.LayoutParams.MATCH_PARENT,
                 2 , 1f);
+
+        TableRow.LayoutParams paramsLineBig = new TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT,
+                4 , 1f);
 
         int index;
 
@@ -165,13 +178,12 @@ public class TabWhatIf  extends Fragment {
 
             // requirement header
             TextView requirementTV = new TextView(container.getContext());
-            requirementTV.setLayoutParams(paramsMatchTableRow);
+            requirementTV.setLayoutParams(paramsMatchReqHeader);
             requirementTV.setText(newReq.getName());
             requirementTV.setTypeface(null, Typeface.BOLD);
             requirementTV.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             requirementTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             requirementTV.setGravity(Gravity.CENTER_HORIZONTAL);
-            paramsMatchTableRow.setMargins(0, 0, 0, 0);
 
             TableLayout courseTable = new TableLayout(container.getContext());
             courseTable.setLayoutParams(paramsMatchTable);
@@ -186,6 +198,11 @@ public class TabWhatIf  extends Fragment {
                 DegreeSubRequirement newSubReq = newReq.getSubRequirement(mindex);
                 paramsMatchTableRow.setMargins(0, 15, 0, 0);
 
+                View outDivider = new View(container.getContext());
+                outDivider.setLayoutParams(paramsLineBig);
+                outDivider.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                outDivider.setElevation(5);
+
                 // sub requirement header
                 TextView subRequirementTV = new TextView(container.getContext());
                 paramsMatchTableRow.setMargins(0, 15, 0, 0);
@@ -196,12 +213,9 @@ public class TabWhatIf  extends Fragment {
                 subRequirementTV.setGravity(Gravity.CENTER_HORIZONTAL);
                 paramsMatchTableRow.setMargins(0, 0, 0, 0);
 
+                paramsMatchTableHeader.setMargins(0, 25, 0, 0);
                 TableRow headerRow = new TableRow(container.getContext());
-                paramsMatchTableRow.setMargins(0, 10, 0, 0);
                 headerRow.setLayoutParams(paramsMatchTableRow);
-                headerRow.setPadding(0, 0, 0, 0);
-                paramsMatchTableRow.setMargins(0, 0, 0, 0);
-//            headerRow.setGravity(Gravity.CENTER);
 
                 TextView courseTV = new TextView(container.getContext());
                 courseTV.setLayoutParams(paramsMatchTableRow);
@@ -220,18 +234,18 @@ public class TabWhatIf  extends Fragment {
                 descTV.setGravity(Gravity.CENTER_HORIZONTAL);
 
                 TextView gradeTV = new TextView(container.getContext());
-                gradeTV.setLayoutParams(paramsMatchTableRow);
+                gradeTV.setLayoutParams(paramsMatchTableHeader);
                 gradeTV.setText("Grade");
                 gradeTV.setTypeface(null, Typeface.BOLD);
                 gradeTV.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                 gradeTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-                descTV.setGravity(Gravity.CENTER_HORIZONTAL);
 
                 headerRow.addView(courseTV);
                 headerRow.addView(descTV);
                 headerRow.addView(gradeTV);
 
                 courseTable.addView(subRequirementTV);
+                courseTable.addView(outDivider);
                 courseTable.addView(headerRow);
 
                 for (i = 0; i < newSubReq.getNumberOfCourses(); i++) {
@@ -243,10 +257,10 @@ public class TabWhatIf  extends Fragment {
                     newRow.setPadding(0, 50, 0, 50);
                     newRow.setGravity(Gravity.CENTER);
 
-                    View divider = new View(container.getContext());
-                    divider.setLayoutParams(paramsLine);
-                    divider.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    divider.setElevation(5);
+                    View inDivider = new View(container.getContext());
+                    inDivider.setLayoutParams(paramsLine);
+                    inDivider.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    inDivider.setElevation(5);
 
                     paramsWrapTableRow.weight = 1;
 
@@ -290,6 +304,8 @@ public class TabWhatIf  extends Fragment {
                             TextView courseDesc = popupView.findViewById(R.id.courseDesc);
                             final Button sessionBtn = popupView.findViewById(R.id.sessionButton);
                             final TextView sessionTV = popupView.findViewById(R.id.sessionTV);
+                            final TextView sessionHeaderTV = popupView.findViewById(R.id.sessionHeaderTV);
+                            final CourseStatus status = newCourse.getStatus();
 
                             sessionBtn.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -298,21 +314,43 @@ public class TabWhatIf  extends Fragment {
 
                                     if (sessionTV.getVisibility() == View.GONE) {
 
+                                        if ( status.equals(CourseStatus.NotTaken) ) {
+
+                                            sessionHeaderTV.setText("Offered: ");
+                                        } else if (status.equals(CourseStatus.Enrolled) ) {
+
+                                            sessionHeaderTV.setText("Currently Enrolled in Session: ");
+                                        } else {
+                                            sessionHeaderTV.setText("Session taken: ");
+                                        }
+
+                                        sessionHeaderTV.setVisibility(View.VISIBLE);
                                         sessionTV.setVisibility(View.VISIBLE);
-                                        sessionTV.setText("<COURSE SESSIONS HERE>");
+
+                                        if ( newCourse.gotSessions()
+                                                &&  newCourse.getSession(index) != null
+                                                && newCourse.getSession(index).getInstructor() != null) {
+
+                                            sessionTV.setText(newCourse.getSession(index).getInstructor()
+                                                    + "\n" + newCourse.getSession(index).getSchedule());
+
+                                        } else if ( newCourse.gotSessions()
+                                                &&  newCourse.getSession(index) != null ) {
+
+                                            sessionTV.setText(newCourse.getSession(index).getSchedule());
+
+                                        }else {
+                                            sessionTV.setText("Not Available");
+                                        }
 
                                         sessionBtn.setText("Close Sessions");
 
                                     } else {
 
+                                        sessionHeaderTV.setVisibility(View.GONE);
                                         sessionTV.setVisibility(View.GONE);
-                                        sessionTV.setText("<COURSE SESSIONS HERE>");
                                         sessionBtn.setText("Sessions");
                                     }
-
-                                    if (record.getCourse(index).gotSessions()) {
-
-                                    } else { }
                                 }
                             });
 
@@ -354,7 +392,7 @@ public class TabWhatIf  extends Fragment {
                     courseTable.addView(newRow);
 
                     if (i != record.getNumberOfCourses() - 1) {
-                        courseTable.addView(divider);
+                        courseTable.addView(inDivider);
                     }
                 }
             }

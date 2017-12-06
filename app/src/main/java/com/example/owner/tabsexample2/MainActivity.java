@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setOffscreenPageLimit(3);
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawer.getForeground().setAlpha(0);
