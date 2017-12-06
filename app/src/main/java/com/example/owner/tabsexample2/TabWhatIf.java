@@ -228,7 +228,7 @@ public class TabWhatIf  extends Fragment {
                 headerRow.setLayoutParams(paramsMatchTableRow);
 
                 TextView courseTV = new TextView(container.getContext());
-                courseTV.setLayoutParams(paramsMatchTableRow);
+                courseTV.setLayoutParams(paramsMatchTableHeader);
                 courseTV.setText("Course");
                 courseTV.setTypeface(null, Typeface.BOLD);
                 courseTV.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
@@ -236,7 +236,7 @@ public class TabWhatIf  extends Fragment {
                 courseTV.setGravity(Gravity.CENTER_HORIZONTAL);
 
                 TextView descTV = new TextView(container.getContext());
-                descTV.setLayoutParams(paramsMatchTableRow);
+                descTV.setLayoutParams(paramsMatchTableHeader);
                 descTV.setText("Description");
                 descTV.setTypeface(null, Typeface.BOLD);
                 descTV.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
@@ -268,7 +268,8 @@ public class TabWhatIf  extends Fragment {
 
                     TableRow newRow = new TableRow(container.getContext());
                     newRow.setLayoutParams(paramsMatchTableRow);
-                    newRow.setPadding(0, 50, 0, 50);
+                    if (i == 0) { newRow.setPadding(0, 10, 0, 50); }
+                    else { newRow.setPadding(0, 50, 0, 50); }
                     newRow.setGravity(Gravity.CENTER);
 
                     View inDivider = new View(container.getContext());

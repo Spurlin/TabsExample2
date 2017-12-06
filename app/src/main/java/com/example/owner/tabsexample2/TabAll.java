@@ -99,6 +99,14 @@ public class TabAll extends Fragment implements Serializable {
                 TableRow.LayoutParams.MATCH_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT, 1f ) ;
 
+        TableRow.LayoutParams paramsMatchTableHeader = new TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT, 1f ) ;
+
+        LinearLayout.LayoutParams paramsMatchReqHeader = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT ) ;
+
         TableRow.LayoutParams paramsWrapTableRow = new TableRow.LayoutParams(
                 0,
                 TableRow.LayoutParams.WRAP_CONTENT, 1f ) ;
@@ -106,6 +114,10 @@ public class TabAll extends Fragment implements Serializable {
         TableRow.LayoutParams paramsLine = new TableRow.LayoutParams(
                 TableRow.LayoutParams.MATCH_PARENT,
                 2 , 1f);
+
+        TableRow.LayoutParams paramsLineBig = new TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT,
+                4 , 1f);
 
         CardView newCard = new CardView(container.getContext());
         newCard.setLayoutParams(paramsWrapCARD);
