@@ -262,4 +262,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         return card;
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
 }

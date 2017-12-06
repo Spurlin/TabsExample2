@@ -158,4 +158,8 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
 
         }
     }
+
+    @Override
+    public void onBackPressed() {
+    }
 }
