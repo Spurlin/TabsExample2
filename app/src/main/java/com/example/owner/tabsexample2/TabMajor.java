@@ -307,19 +307,22 @@ public class TabMajor extends Fragment implements Serializable {
                                         sessionHeaderTV.setVisibility(View.VISIBLE);
                                         sessionTV.setVisibility(View.VISIBLE);
 
-                                        if ( newCourse.gotSessions()
-                                                &&  newCourse.getSession(index) != null
-                                                && newCourse.getSession(index).getInstructor() != null) {
+                                        if(!newCourse.gotSessions())
+                                            newCourse.retrieveSessionsFromServer();//Get the sessions for this class if they have not been gotten already.
 
-                                            sessionTV.setText(newCourse.getSession(index).getInstructor()
-                                            + "\n" + newCourse.getSession(index).getSchedule());
+                                        if (newCourse.getNumberOfSessions() > 0) {
 
-                                        } else if ( newCourse.gotSessions()
-                                                    &&  newCourse.getSession(index) != null ) {
+                                            String sessionText = "";
 
-                                            sessionTV.setText(newCourse.getSession(index).getSchedule());
+                                            for(int i = 0; i < newCourse.getNumberOfSessions(); i++)
+                                                sessionText += newCourse.getSession(index).getInstructor()
+                                                        + " " + newCourse.getSession(index).getRoom()
+                                                        + "\n" + newCourse.getSession(index).getSchedule()
+                                                        + " " + newCourse.getSession(index).getSemester() + "\n\n";
 
-                                         }else {
+                                            sessionTV.setText(sessionText);
+
+                                        } else {
                                             sessionTV.setText("Not Available");
                                         }
 
