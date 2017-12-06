@@ -1,5 +1,7 @@
 package com.example.owner.tabsexample2;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -24,6 +26,13 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
@@ -58,6 +67,7 @@ public class TabWhatIf  extends Fragment {
 
         record = (StudentRecord) intent.getSerializableExtra("StudentRecord");
         degreeNames = record.getDegreeNames();
+
         sMajor = degreeNames[0];
 
         spMajor = (Spinner) rootView.findViewById(R.id.whatIf_Spinner);
@@ -96,14 +106,10 @@ public class TabWhatIf  extends Fragment {
 
     public void setView(View rootView, ViewGroup container) {
 
-        credsEarned = (int) whatIfDegreePlan.getCreditsEarned();
+        //credsEarned = (int) whatIfDegreePlan.getCreditsEarned();
         creditsLeft = (int) whatIfDegreePlan.getCreditsNeeded();
 
-        TextView ratio = (TextView) rootView.findViewById(R.id.ratio);
-        ratio.setText(credsEarned + "/" + 120 + " Credits");
-        ProgressBar mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
-        mProgressBar.setMax(120);
-        mProgressBar.setProgress(credsEarned);
+        credsEarned = 0;
 
         LinearLayout mLinearLayout = (LinearLayout) rootView.findViewById(R.id.whatIf_main_LinLayout);
 
@@ -142,6 +148,10 @@ public class TabWhatIf  extends Fragment {
                 2 , 1f);
 
         int index;
+
+        Set<String> noCredit = new HashSet<String>(Arrays.asList(new String[] {"NotTaken", "Enrolled", "TD", "D", "F"}));
+
+        credsEarned = 0;
 
         for (index = 0; index < whatIfDegreePlan.getNumberOfRequirement(); index++) {
 
@@ -237,6 +247,10 @@ public class TabWhatIf  extends Fragment {
                 for (i = 0; i < newSubReq.getNumberOfCourses(); i++) {
 
                     final Course newCourse = newSubReq.getCourse(i);
+
+                    if (!noCredit.contains(newCourse.getStatus().toString())) {
+                        credsEarned += newCourse.getUnits();
+                    }
 
                     TableRow newRow = new TableRow(container.getContext());
                     newRow.setLayoutParams(paramsMatchTableRow);
@@ -357,6 +371,13 @@ public class TabWhatIf  extends Fragment {
                         courseTable.addView(divider);
                     }
                 }
+
+                TextView ratio = (TextView) rootView.findViewById(R.id.ratio);
+                ratio.setText(credsEarned + "/" + 120 + " Credits");
+                ProgressBar mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+                mProgressBar.setMax(120);
+                mProgressBar.setProgress(credsEarned);
+
             }
 
             insideLinLayout.addView(courseTable);
@@ -367,3 +388,5 @@ public class TabWhatIf  extends Fragment {
 
     }
 }
+
+
