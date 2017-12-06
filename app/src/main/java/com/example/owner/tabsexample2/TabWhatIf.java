@@ -405,7 +405,7 @@ public class TabWhatIf  extends Fragment {
                     newRow.addView(newGradeTV);
                     courseTable.addView(newRow);
 
-                    if (i != record.getNumberOfCourses() - 1) {
+                    if ((i != newSubReq.getNumberOfCourses() - 1) ) {
                         courseTable.addView(inDivider);
                     }
                 }
