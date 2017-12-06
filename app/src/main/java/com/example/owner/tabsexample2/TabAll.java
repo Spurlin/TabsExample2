@@ -37,6 +37,9 @@ import junit.framework.Test;
 import org.w3c.dom.Text;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
@@ -158,6 +161,8 @@ public class TabAll extends Fragment implements Serializable {
 
         credsEarned = 0;
 
+        Set<String> noCredit = new HashSet<String>(Arrays.asList(new String[] {"Enrolled", "TD", "D", "F"}));
+
         for (i = 0; i < record.getNumberOfCourses(); i++) {
 
             if (record.getCourseStatus(i) != "NotTaken") {
@@ -169,7 +174,10 @@ public class TabAll extends Fragment implements Serializable {
 
                 if (addedIndicator >= 3) { courseTable.addView(divider); }
 
-                credsEarned += record.getCourseUnits(i);
+                if (!noCredit.contains(record.getCourseStatus(i))) {
+                    credsEarned += record.getCourseUnits(i);
+                }
+
                 TableRow newRow = new TableRow(container.getContext());
                 newRow.setLayoutParams(paramsMatchTableRow);
                 newRow.setPadding(0, 50, 0, 50);

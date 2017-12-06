@@ -51,15 +51,10 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
                 // get the entered values for username and password
                 userName = usrName_Btn.getText().toString();
                 pswd = pswd_Btn.getText().toString();
-                if (isConnected()) {
-                    // get the entered values for username and password
-                    userName = usrName_Btn.getText().toString();
-                    pswd = pswd_Btn.getText().toString();
+                if (isConnected())
                     checkCredentials(userName,pswd);
-                }
-                else {
-                    alertMsg("Error","You need to be connected to the internet to log in.");
-                }
+               else
+                    alertMsg("Error","You must be connected to the internet to log in.");
 
         }});
 
@@ -102,7 +97,7 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
             System.out.println(result);
             String[] fields = result.split("~");
             System.out.println("Fields: " + fields.length);
-            if(fields.length >= 5) { //Don't try this if we didn't get enough fields to set up the student.
+            if (fields.length >= 5) { //Don't try this if we didn't get enough fields to set up the student.
                 record = new StudentRecord(fields[1], fields[2], fields[3], fields[4]);//Start building the student record.
             }
         } catch (InterruptedException e) {

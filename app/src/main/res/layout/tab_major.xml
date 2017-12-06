@@ -85,13 +85,13 @@
                             android:layout_height="wrap_content"
                             android:indeterminate="false"
                             android:max="120"
-                            android:progress="12" />
+                            android:progress="0" />
 
                         <TextView
                             android:id="@+id/ratio"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="12/120 credits"
+                            android:text="0/120 credits"
                             android:textAlignment="center"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorLink="@android:color/black" />

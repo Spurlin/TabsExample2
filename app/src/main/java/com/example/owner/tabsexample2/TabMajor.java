@@ -23,6 +23,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
@@ -65,12 +68,6 @@ public class TabMajor extends Fragment implements Serializable {
 
         credsEarned = (int) majorDegreePlan.getCreditsEarned();
         creditsLeft = (int) majorDegreePlan.getCreditsNeeded();
-
-        TextView ratio = (TextView) rootView.findViewById(R.id.ratio);
-        ratio.setText(credsEarned + "/" + 120 + " Credits");
-        ProgressBar mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
-        mProgressBar.setMax(120);
-        mProgressBar.setProgress(credsEarned);
 
         LinearLayout mLinearLayout = (LinearLayout) rootView.findViewById(R.id.major_main_LinLayout);
 
@@ -121,6 +118,10 @@ public class TabMajor extends Fragment implements Serializable {
                 4 , 1f);
 
         int index;
+
+        Set<String> noCredit = new HashSet<String>(Arrays.asList(new String[] {"NotTaken", "Enrolled", "TD", "D", "F"}));
+
+        credsEarned = 0;
 
         for (index = 0; index < majorDegreePlan.getNumberOfRequirement(); index++) {
 
@@ -225,6 +226,10 @@ public class TabMajor extends Fragment implements Serializable {
                 for (i = 0; i < newSubReq.getNumberOfCourses(); i++) {
 
                     final Course newCourse = newSubReq.getCourse(i);
+
+                    if (!noCredit.contains(newCourse.getStatus().toString())) {
+                        credsEarned += newCourse.getUnits();
+                    }
 
                     TableRow newRow = new TableRow(container.getContext());
                     newRow.setLayoutParams(paramsMatchTableRow);
@@ -370,6 +375,12 @@ public class TabMajor extends Fragment implements Serializable {
                         courseTable.addView(inDivider);
                     }
                 }
+
+                TextView ratio = (TextView) rootView.findViewById(R.id.ratio);
+                ratio.setText(credsEarned + "/" + 120 + " Credits");
+                ProgressBar mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+                mProgressBar.setMax(120);
+                mProgressBar.setProgress(credsEarned);
             }
 
             insideLinLayout.addView(courseTable);

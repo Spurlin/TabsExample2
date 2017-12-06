@@ -1,8 +1,10 @@
 package com.example.owner.tabsexample2;
 
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import java.io.Serializable;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -30,12 +32,15 @@ public class DegreePlan extends AppCompatActivity implements AsyncResponse, Seri
         String result = null;
         try {
             result = dbConnector.get();
-            String[] fields = result.split("~");
-            System.out.println("Fields: " + fields.length);
             requirements = new ArrayList();
-            for(int i = 1; i < fields.length - 1; i += 2)//Create each degree requirement object.
-                requirements.add(new DegreeRequirement(fields[i], fields[i+1], allCourses));//Constructor takes arguments in same order they were sent over from database.
-        } catch (InterruptedException e) {
+            if (result != "Error") {
+                String[] fields = result.split("~");
+                System.out.println("Fields: " + fields.length);
+
+                for (int i = 1; i < fields.length - 1; i += 2)//Create each degree requirement object.
+                    requirements.add(new DegreeRequirement(fields[i], fields[i + 1], allCourses));//Constructor takes arguments in same order they were sent over from database.
+            }
+            } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
@@ -48,9 +53,10 @@ public class DegreePlan extends AppCompatActivity implements AsyncResponse, Seri
     private float calculateCreditsNeeded()
     {
         creditsNeeded = 0;
-        for (DegreeRequirement r : requirements)
-        {
-            creditsNeeded += r.getCreditsNeeded();
+        if (!requirements.isEmpty()) {
+            for (DegreeRequirement r : requirements) {
+                creditsNeeded += r.getCreditsNeeded();
+            }
         }
         return creditsNeeded;
     }
@@ -58,9 +64,10 @@ public class DegreePlan extends AppCompatActivity implements AsyncResponse, Seri
     private float calculateCreditsEarned()
     {
         creditsEarned = 0;
-        for (DegreeRequirement r : requirements)
-        {
-            creditsEarned += r.getCreditsEarned();
+        if (!requirements.isEmpty()) {
+            for (DegreeRequirement r : requirements) {
+                creditsEarned += r.getCreditsEarned();
+            }
         }
         return creditsEarned;
     }
