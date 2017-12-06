@@ -346,13 +346,13 @@ public class TabWhatIf  extends Fragment {
 
                                         if (newCourse.getNumberOfSessions() > 0) {
 
-                                            String sessionText = "THIS DID SOMETHING";
+                                            String sessionText = "";
 
-                                            /*for(int i = 0; i < newCourse.getNumberOfSessions(); i++)
+                                            for(int i = 0; i < newCourse.getNumberOfSessions(); i++)
                                                 sessionText += newCourse.getSession(index).getInstructor()
                                                         + " " + newCourse.getSession(index).getRoom()
                                                         + "\n" + newCourse.getSession(index).getSchedule()
-                                                        + " " + newCourse.getSession(index).getSemester() + "\n\n";*/
+                                                        + " " + newCourse.getSession(index).getSemester() + "\n\n";
 
                                             sessionTV.setText(sessionText);
 
