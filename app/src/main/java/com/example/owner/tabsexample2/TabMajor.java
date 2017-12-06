@@ -315,11 +315,17 @@ public class TabMajor extends Fragment implements Serializable {
                                             String sessionText = "";
 
                                             for(int i = 0; i < newCourse.getNumberOfSessions(); i++)
-                                                sessionText += newCourse.getSession(index).getInstructor()
-                                                        + " " + newCourse.getSession(index).getRoom()
-                                                        + "\n" + newCourse.getSession(index).getSchedule()
-                                                        + " " + newCourse.getSession(index).getSemester() + "\n\n";
 
+                                                if (newCourse.getSession(i).getInstructor() != null) {
+                                                    sessionText += "Professor: " + newCourse.getSession(i).getInstructor()
+                                                            + "\nRoom: " + newCourse.getSession(i).getRoom()
+                                                            + "\nSchedule: " + newCourse.getSession(i).getSchedule()
+                                                            + "\nSemester: " + newCourse.getSession(i).getSemester() + "\n\n";
+                                                } else {
+                                                    sessionText += "Room: " + newCourse.getSession(i).getRoom()
+                                                            + "\nSchedule: " + newCourse.getSession(i).getSchedule()
+                                                            + "\nSemester: " + newCourse.getSession(i).getSemester() + "\n\n";
+                                                }
                                             sessionTV.setText(sessionText);
 
                                         } else {

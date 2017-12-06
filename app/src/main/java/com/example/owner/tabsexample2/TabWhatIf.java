@@ -346,14 +346,20 @@ public class TabWhatIf  extends Fragment {
 
                                         if (newCourse.getNumberOfSessions() > 0) {
 
-                                            String sessionText = "THIS DID SOMETHING";
+                                            String sessionText = "";
 
-                                            /*for(int i = 0; i < newCourse.getNumberOfSessions(); i++)
-                                                sessionText += newCourse.getSession(index).getInstructor()
-                                                        + " " + newCourse.getSession(index).getRoom()
-                                                        + "\n" + newCourse.getSession(index).getSchedule()
-                                                        + " " + newCourse.getSession(index).getSemester() + "\n\n";*/
+                                            for(int i = 0; i < newCourse.getNumberOfSessions(); i++)
 
+                                                if (newCourse.getSession(index).getInstructor() != null) {
+                                                    sessionText += "Professor: " + newCourse.getSession(i).getInstructor()
+                                                            + "\nRoom: " + newCourse.getSession(i).getRoom()
+                                                            + "\nSchedule: " + newCourse.getSession(i).getSchedule()
+                                                            + "\nSemester: " + newCourse.getSession(i).getSemester() + "\n\n";
+                                                } else {
+                                                    sessionText += "Room: " + newCourse.getSession(i).getRoom()
+                                                            + "\nSchedule: " + newCourse.getSession(i).getSchedule()
+                                                            + "\nSemester: " + newCourse.getSession(i).getSemester() + "\n\n";
+                                                }
                                             sessionTV.setText(sessionText);
 
                                         } else {

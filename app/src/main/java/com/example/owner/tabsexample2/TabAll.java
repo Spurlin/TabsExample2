@@ -213,6 +213,8 @@ public class TabAll extends Fragment implements Serializable {
                         View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.popupwindow, null);
 
                         final int index = (int) v.getTag();
+                        System.out.println("<< " + index + " >>");
+                        System.out.println("<< " + record.getCourse(index).getName() + " >>");
                         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
                         boolean focusable = true;
@@ -248,21 +250,31 @@ public class TabAll extends Fragment implements Serializable {
                                     sessionHeaderTV.setVisibility(View.VISIBLE);
                                     sessionTV.setVisibility(View.VISIBLE);
 
-                                   if ( record.getCourse(index).gotSessions()
-                                           &&  record.getCourse(index).getSession(index) != null
-                                           && record.getCourse(index).getSession(index).getInstructor() != null) {
+                                    if(!record.getCourse(index).gotSessions()) {
+                                        record.getCourse(index).retrieveSessionsFromServer();//Get the sessions for this class if they have not been gotten already.
+                                    }
 
-                                       sessionTV.setText(record.getCourse(index).getSession(index).getInstructor()
-                                               + "\n" + record.getCourse(index).getSession(index).getSchedule());
+                                    if (record.getCourse(index).getNumberOfSessions() > 0) {
 
-                                   } else if ( record.getCourse(index).gotSessions()
-                                            &&  record.getCourse(index).getSession(index) != null ) {
+                                        String sessionText = "";
 
-                                       sessionTV.setText(record.getCourse(index).getSession(index).getSchedule());
-                                   }
-                                   else {
-                                       sessionTV.setText("Not Available");
-                                   }
+                                        for(int i = 0; i < record.getCourse(index).getNumberOfSessions(); i++)
+
+                                            if (record.getCourse(index).getSession(i).getInstructor() != null) {
+                                                sessionText += "Professor: " + record.getCourse(index).getSession(i).getInstructor()
+                                                        + "\nRoom: " + record.getCourse(index).getSession(i).getRoom()
+                                                        + "\nSchedule: " + record.getCourse(index).getSession(i).getSchedule()
+                                                        + "\nSemester: " + record.getCourse(index).getSession(i).getSemester() + "\n\n";
+                                            } else {
+                                                sessionText += "Room: " + record.getCourse(index).getSession(i).getRoom()
+                                                        + "\nSchedule: " + record.getCourse(index).getSession(i).getSchedule()
+                                                        + "\nSemester: " + record.getCourse(index).getSession(i).getSemester() + "\n\n";
+                                            }
+                                        sessionTV.setText(sessionText);
+
+                                    } else {
+                                        sessionTV.setText("Not Available");
+                                    }
 
                                     sessionBtn.setText("Close Sessions");
 

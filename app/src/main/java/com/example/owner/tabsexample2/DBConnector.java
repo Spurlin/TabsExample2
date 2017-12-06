@@ -260,7 +260,7 @@ public class DBConnector extends AsyncTask<String,Void,String> implements Serial
                 while((line = bufferedReader.readLine())!= null) {
                     result += line;
 
-                    System.out.println("<RESULT> " + result);
+                    System.out.println("<CLASSES RESULT> " + result);
                 }
                 bufferedReader.close();
                 inputStream.close();
