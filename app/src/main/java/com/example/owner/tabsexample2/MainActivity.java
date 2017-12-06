@@ -69,34 +69,42 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // get intent
         Intent intent = getIntent();
 
+        // get the student record that was retrieved from the database
+        // upon logging in
         StudentRecord record = (StudentRecord) intent.getSerializableExtra("StudentRecord");
-        setTitle(record.getStudentName());
+        setTitle(record.getStudentName()); // set the Title of the main (outermost) layout to the student name
 
         mContext = getApplicationContext();
         mLinearLayout = (LinearLayout) findViewById(R.id.all_main_LinLayout);
 
+        // set up the toolbar for the main layout
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Create the adapter that will return a fragment for each of the four
+        // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        // allow for all three views to be stored in memory for fast run time
         mViewPager.setOffscreenPageLimit(3);
 
+        // main (outermost) layout
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawer.getForeground().setAlpha(0);
+        mDrawer.getForeground().setAlpha(0); // set background to normal
 
         final NestedScrollView myScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
 
+        // set up the tabs for the main layout
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        // floating button to be implemented
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -110,9 +118,10 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
     }
 
-
+    // log off toast
     private void toast() {Toast.makeText(this, "Logging Off...", Toast.LENGTH_SHORT).show();}
 
+    // log of action
     private void log_off() {
         Intent intent = new Intent(this, Log_In.class);
         startActivity(intent);
@@ -123,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 //        startActivity(intent);
 //    }
 
+    // create the options menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -131,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     }
 
 
-
+    // handles the selection of an options item (ex: log off)
         @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -148,8 +158,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         return super.onOptionsItemSelected(item);
     }
 
-    // Deleted PlaceholderFragment from here
-
+    // handles the swapping through views
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -200,68 +209,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         }
     }
 
-//this is where the popup is
-    public void onClick(View v) {
-//        startActivity(new Intent(MainActivity.this,Pop.class));
-
-        DrawerLayout mainLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.popupwindow, null);
-
-        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        boolean focusable = true;
-        popupWindow = new PopupWindow(popupView, width, height, focusable);
-
-        // show in the center of the screen
-        popupWindow.showAtLocation(mainLayout, Gravity.CENTER, 0, 0);
-
-        // greys the layout that the pop up window is on top of
-        mDrawer.getForeground().setAlpha(220);
-
-        // handles when the pop up window is closed via touch outside of window or
-        // via back button
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                mDrawer.getForeground().setAlpha(0);
-                popupWindow.dismiss();
-            }
-        });
-
-    }
-
-    public CardView createCard(int i) {
-
-        CardView card = new CardView(mContext);
-
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-
-        card.setLayoutParams(params);
-        card.setRadius(20);
-        card.setContentPadding(10, 10 , 10 , 10 );
-        card.setMaxCardElevation(20);
-        card.setMaxCardElevation(20);
-
-        TextView tv = new TextView(mContext);
-        tv.setLayoutParams(params);
-        tv.setText("This is card number " + i);
-        tv.setTextColor(Color.RED);
-
-        card.addView(tv);
-
-        // create linear layout
-        // create TableLayout
-        // add default header row 1
-        // create the remaining rows based on the respective data
-
-        return card;
-    }
-
+    // override the back button action to not do anything
     @Override
     public void onBackPressed() {
     }

@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -61,6 +62,7 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
 
     }
 
+    // check if connected to a network
     private boolean isConnected() {
         ConnectivityManager connec = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -87,6 +89,7 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
         alertDialog.show();
     }
 
+    // checks the database with the given credentials
     private void checkCredentials(String userName, String password) {
         try {
         String type = "login";
@@ -159,6 +162,7 @@ public class Log_In extends AppCompatActivity implements AsyncResponse, Serializ
         }
     }
 
+    // override the back button
     @Override
     public void onBackPressed() {
     }
